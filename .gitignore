@@ -1,0 +1,7 @@
+./Rockman_V0/bin
+./Rockman_V0/obj
+./Rockman_V0/Rockman_V0.depend
+./Rockman_V0/Rockman_V0.layout
+
+*.exe
+*.o

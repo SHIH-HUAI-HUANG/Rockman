@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1670226602 source:d:\shih-huai\rockman_v0\player.c
+	"resource.h"
+
+1670226444 d:\shih-huai\rockman_v0\resource.h
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<time.h>
+	<allegro5/allegro.h>
+	<allegro5/allegro_image.h>
+	<allegro5/allegro_audio.h>
+	<allegro5/allegro_acodec.h>
+	<allegro5/allegro_ttf.h>
+	<allegro5/allegro_font.h>
+	<allegro5/allegro_native_dialog.h>
+	<allegro5/allegro.h>
+	<allegro5/allegro_audio.h>
+	<allegro5/allegro_primitives.h>
+
+1670225413 source:d:\shih-huai\rockman_v0\main.c
+	"resource.h"
+
+1670226638 source:d:\shih-huai\rockman_v0\allegro.c
+	"resource.h"
+

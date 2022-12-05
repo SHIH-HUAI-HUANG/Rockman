@@ -20,6 +20,11 @@ void InitRockman (Rockman *rockman)
     rockman->jump_time = -1;
 
 
+    for (int i = 0; i < NUM_BULLET; i++)
+    {
+        rockman->bullet[i].activity = false;
+    }
+
     rockman->direction = false;
     rockman->img = al_load_bitmap ("./picture/rockman.png");
 
@@ -35,42 +40,42 @@ void DrawRockman (Rockman *rockman, Allegro *allegro)
     {
     case STAND:
         if ( 0 <= range_stand && range_stand < 100)
-            al_draw_bitmap_region (rockman->img, 11, 40, 123, 140, rockman->x, rockman->y, rockman->direction);
+            al_draw_bitmap_region (rockman->img, 6, 3, 74, 105, rockman->x, rockman->y, rockman->direction);
 
         else if ( 100 <= range_stand && range_stand < 120)
-            al_draw_bitmap_region (rockman->img, 203, 40, 123, 140, rockman->x, rockman->y, rockman->direction);
+            al_draw_bitmap_region (rockman->img, 122, 3, 73, 105, rockman->x, rockman->y, rockman->direction);
         break;
 
     case RUN_RIGHT:
         if ( 0 <= range && range < 8)
-            al_draw_bitmap_region (rockman->img, 17, 232, 140, 140, rockman->x, rockman->y, rockman->direction);
+            al_draw_bitmap_region (rockman->img, 125, 233, 101, 105, rockman->x, rockman->y, rockman->direction);
 
         else if ( 8 <= range && range < 16)
-            al_draw_bitmap_region (rockman->img, 226, 232, 94, 140, rockman->x, rockman->y, rockman->direction);
+            al_draw_bitmap_region (rockman->img, 251, 233, 91, 105, rockman->x, rockman->y, rockman->direction);
 
         else if ( 16 <= range && range < 24)
-            al_draw_bitmap_region (rockman->img, 395, 232, 123, 140, rockman->x, rockman->y, rockman->direction);
+            al_draw_bitmap_region (rockman->img, 352, 233, 105, 105, rockman->x, rockman->y, rockman->direction);
 
         else if ( 24 <= range && range < 32)
-            al_draw_bitmap_region (rockman->img, 226, 232, 94, 140, rockman->x, rockman->y, rockman->direction);
+            al_draw_bitmap_region (rockman->img, 251, 233, 91, 105, rockman->x, rockman->y, rockman->direction);
         break;
 
     case RUN_LEFT:
         if ( 0 <= range && range < 8)
-            al_draw_bitmap_region (rockman->img, 17, 232, 140, 140, rockman->x, rockman->y, rockman->direction);
+            al_draw_bitmap_region (rockman->img, 125, 233, 101, 105, rockman->x, rockman->y, rockman->direction);
 
         else if ( 8 <= range && range < 16)
-            al_draw_bitmap_region (rockman->img, 226, 232, 94, 140, rockman->x, rockman->y, rockman->direction);
+            al_draw_bitmap_region (rockman->img, 251, 233, 91, 105, rockman->x, rockman->y, rockman->direction);
 
         else if ( 16 <= range && range < 24)
-            al_draw_bitmap_region (rockman->img, 395, 232, 123, 140, rockman->x, rockman->y, rockman->direction);
+            al_draw_bitmap_region (rockman->img, 352, 233, 105, 105, rockman->x, rockman->y, rockman->direction);
 
         else if ( 24 <= range && range < 32)
-            al_draw_bitmap_region (rockman->img, 226, 232, 94, 140, rockman->x, rockman->y, rockman->direction);
+            al_draw_bitmap_region (rockman->img, 251, 233, 91, 105, rockman->x, rockman->y, rockman->direction);
         break;
 
     case JUMP:
-        al_draw_bitmap_region (rockman->img, 0, 389, 169, 175, rockman->x, rockman->y, rockman->direction);
+        al_draw_bitmap_region (rockman->img, 0, 233, 101, 105, rockman->x, rockman->y, rockman->direction);
         break;
 
     }

@@ -22,7 +22,7 @@
 #define SPEED 4
 #define NUM_BULLET 30
 #define JUMP_TIME 60
-#define NUM_BULLET 20
+
 
 
 typedef struct Bullet
@@ -30,6 +30,7 @@ typedef struct Bullet
     int x;
     int y;
     bool activity;
+    bool direction;
 
 } Bullet;
 
@@ -41,12 +42,28 @@ typedef struct Rockman
     int speed;
     int state;
     int jump_time;
+    int HP;
 
     bool direction;
     ALLEGRO_BITMAP *img;
-    // struct Laser **laser;
+    Bullet bullet[NUM_BULLET];
 
 } Rockman;
+
+typedef struct Boss_1
+{
+    int x;
+    int y;
+    int speed;
+    int state;
+    int jump_time;
+    int HP;
+
+    bool direction;
+    ALLEGRO_BITMAP *img;
+    Bullet bullet[NUM_BULLET];
+
+} Boss_1;
 
 typedef struct Allegro
 {
@@ -86,7 +103,7 @@ typedef enum
 /** allegro */
 Allegro *CallocAllegro();
 void AllegroDriverInit(Allegro *allegro);
-void EventCheck(Allegro *allegro, Rockman *rockman);
+void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1);
 
 
 /** rockman */
@@ -96,4 +113,14 @@ void DrawRockman (Rockman *rockman, Allegro *allegro);
 void MoveRockmanInBoss(Rockman *rockman, Allegro *allegro);
 
 
+void CreateBullet (Rockman *rockman);
+void DrawBullet (Rockman *rockman);
+void MoveBullet (Rockman *rockman);
+void CheckBulletOver (Rockman *rockman);
 
+
+/** CopyMan */
+Boss_1 *CallocBoss_1();
+void InitBoss_1 (Boss_1 *boss_1);
+void DrawBoss_1 (Boss_1 *boss_1, Allegro *allegro);
+void MoveBoss_1 (Boss_1 *boss_1);

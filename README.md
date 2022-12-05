@@ -2,6 +2,6 @@
 
 
 ### current progress
-
-* 環境架構完成
-* 目前STATE : 選單、BOSS
+  
+- [x] 環境架構完成
+- [x] 目前STATE : 選單、BOSS

@@ -46,7 +46,7 @@ void AllegroDriverInit(Allegro *allegro)
 
 
 
-void EventCheck(Allegro *allegro, Rockman *rockman)
+void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1)
 {
     if (!al_is_event_queue_empty(allegro->event_queue))
     {
@@ -71,7 +71,11 @@ void EventCheck(Allegro *allegro, Rockman *rockman)
                     break;
 
                 case BOSS_1:
-                    al_clear_to_color (al_map_rgb (0, 0, 0));
+                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
+                       {
+                           printf("space  \n");
+                            CreateBullet (rockman);
+                       }
 
                     break;
 
@@ -103,8 +107,14 @@ void EventCheck(Allegro *allegro, Rockman *rockman)
 
                 case BOSS_1:
                     MoveRockmanInBoss (rockman, allegro);
+                    MoveBullet (rockman);
+                    MoveBoss_1 (boss_1);
+                    CheckBulletOver (rockman);
+
                     al_clear_to_color (al_map_rgb (0, 0, 0));
+                    DrawBullet (rockman);
                     DrawRockman (rockman, allegro);
+                    DrawBoss_1 (boss_1, allegro);
                     break;
 
                 }

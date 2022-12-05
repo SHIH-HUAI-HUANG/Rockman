@@ -34,6 +34,12 @@
 		<Unit filename="allegro.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="boss_1.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bullet.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

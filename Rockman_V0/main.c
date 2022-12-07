@@ -2,8 +2,6 @@
 
 int main()
 {
-    /** enum */
-
     Allegro *allegro = CallocAllegro();
     AllegroDriverInit (allegro);
     Rockman *rockman = CallocRockman ();
@@ -23,5 +21,6 @@ int main()
 
     free(allegro);
     free(rockman);
+    free(boss_1);
     return 0;
 }

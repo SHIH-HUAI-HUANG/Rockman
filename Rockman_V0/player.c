@@ -18,6 +18,7 @@ void InitRockman (Rockman *rockman)
     rockman->speed = SPEED;
     rockman->state = STAND;
     rockman->jump_time = -1;
+    rockman->HP = 10;
 
 
     for (int i = 0; i < NUM_BULLET; i++)
@@ -114,4 +115,13 @@ void MoveRockmanInBoss(Rockman *rockman, Allegro *allegro)
 
 }
 
+
+void DrawRockmanHP (Rockman *rockman)
+{
+    for (int i = 0; i < rockman->HP; i++)
+    {
+        al_draw_filled_rectangle (10, 100 - (i*7), 60, 105 - (i*7), al_map_rgb(255, 250, 0));
+    }
+  al_draw_filled_rectangle (500, 500 , 550, 550, al_map_rgb(255, 250, 0));
+}
 

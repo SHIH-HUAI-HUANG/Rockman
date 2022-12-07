@@ -40,13 +40,22 @@
 		<Unit filename="bullet.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="choose_stage.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="menu.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="player.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="resource.h" />
+		<Unit filename="start.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

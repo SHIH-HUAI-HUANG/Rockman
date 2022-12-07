@@ -41,7 +41,13 @@ void AllegroDriverInit(Allegro *allegro)
 
     allegro->finish = false;
     allegro->FRAME = 0;
-    allegro->STATE = MENU;
+    allegro->STATE = START;
+    allegro->menu.state = M_CHOOSE_STAGE;
+    allegro->menu.stage = CLONE;
+
+    allegro->font_24 = al_load_font("./data/ARIAL.TTF", 24, 0);
+    InitStart (allegro);
+    InitMenu (allegro);
 }
 
 
@@ -62,9 +68,19 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1)
                 al_get_keyboard_state(&allegro->keyboardState);
                 switch (allegro->STATE)
                 {
-                case MENU:
+                case START:
                     if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_ENTER) )
-                        allegro->STATE = BOSS_1;
+                        allegro->STATE = MENU;
+                    break;
+
+                case MENU:
+                    MoveArrowInMenu (allegro);
+                    EnterInMenu (allegro);
+                    break;
+
+                case STAGE:
+                    MoveArrowInStage (allegro);
+                    EnterInStage (allegro);
                     break;
 
                 case RULE:
@@ -72,10 +88,10 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1)
 
                 case BOSS_1:
                     if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
-                       {
-                           printf("space  \n");
-                            CreateBullet (rockman);
-                       }
+                    {
+                        printf("space  \n");
+                        CreateBullet (rockman);
+                    }
 
                     break;
 
@@ -87,6 +103,7 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1)
                 break;
 
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
+                printf("x = %d, y = %d\n", allegro->events.mouse.x, allegro->events.mouse.y);
                 break;
 
             case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
@@ -97,9 +114,17 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1)
 
                 switch (allegro->STATE)
                 {
-                case MENU:
-                    al_clear_to_color (al_map_rgb (240, 230, 140));
+                case START:
+                    DrawStart (rockman, allegro);
+                    break;
 
+                case MENU:
+                    al_clear_to_color (al_map_rgb (0, 0, 0));
+                    DrawMenu (allegro);
+                    break;
+
+                case STAGE:
+                    DrawChooseStage (allegro);
                     break;
 
                 case RULE:
@@ -115,6 +140,7 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1)
                     DrawBullet (rockman);
                     DrawRockman (rockman, allegro);
                     DrawBoss_1 (boss_1, allegro);
+                    DrawRockmanHP (rockman);
                     break;
 
                 }

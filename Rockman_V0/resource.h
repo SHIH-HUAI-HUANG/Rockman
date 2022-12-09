@@ -20,9 +20,17 @@
 #define WINDOWS_H 720
 #define FPS 60
 #define SPEED 4
-#define NUM_BULLET 30
+#define NUM_BULLET 50
 #define JUMP_TIME 60
+#define ATTACK_TIME 15
+#define NUM_STAR 50
 
+typedef struct Star
+{
+    int x;
+    int y;
+    int r;
+} Star;
 
 
 typedef struct Bullet
@@ -42,6 +50,7 @@ typedef struct Rockman
     int speed;
     int state;
     int jump_time;
+    int attack_time;
     int HP;
 
     bool direction;
@@ -96,6 +105,7 @@ typedef struct Allegro
 
     Start start;
     Menu menu;
+    Star star[NUM_STAR];
 
 } Allegro;
 
@@ -106,7 +116,8 @@ typedef enum
     STAND,
     RUN_RIGHT,
     RUN_LEFT,
-    JUMP
+    JUMP,
+    ATTACK
 
 } State_rockman;
 
@@ -150,7 +161,9 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1);
 Rockman *CallocRockman();
 void InitRockman (Rockman *rockman);
 void DrawRockman (Rockman *rockman, Allegro *allegro);
+void RockmanStateInBoss (Rockman *rockman, Allegro *allegro);
 void MoveRockmanInBoss(Rockman *rockman, Allegro *allegro);
+void RockmanJumpInBoss (Rockman *rockman, Allegro *allegro);
 void DrawRockmanHP (Rockman *rockman);
 
 
@@ -160,11 +173,12 @@ void MoveBullet (Rockman *rockman);
 void CheckBulletOver (Rockman *rockman);
 
 
-/** CopyMan */
+/** CopyMan / Boss1 */
 Boss_1 *CallocBoss_1();
 void InitBoss_1 (Boss_1 *boss_1);
 void DrawBoss_1 (Boss_1 *boss_1, Allegro *allegro);
 void MoveBoss_1 (Boss_1 *boss_1);
+void BulletCrushBoss_1 (Boss_1 *boss_1, Rockman *rockman);
 
 
 /** Start */
@@ -173,6 +187,8 @@ void DrawTextInStart (Allegro *allegro);
 void InitStart (Allegro *allegro);
 void DrawStart (Rockman *rockman, Allegro *allegro);
 void DrawEarth (Allegro *allegro);
+void InitStar (int number, Allegro *allegro);
+void DrawStar (int number, Allegro *allegro);
 
 
 /** Menu */

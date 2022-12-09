@@ -43,6 +43,7 @@ void DrawStart (Rockman *rockman, Allegro *allegro)
 {
     al_clear_to_color (al_map_rgb(0, 0, 0));
     al_draw_bitmap (allegro->start.mark_megaman, 190, 50, 0);
+    DrawStar (NUM_STAR, allegro);
     DrawEarth (allegro);
     DrawRockmanInStart (rockman, allegro);
     DrawTextInStart (allegro);
@@ -88,4 +89,26 @@ void DrawEarth (Allegro *allegro)
 }
 
 
+void InitStar (int number, Allegro *allegro)
+{
+    for (int i = 0; i < number; i++)
+    {
+        allegro->star[i].x = rand()%WINDOWS_W;
+        allegro->star[i].y = rand()%WINDOWS_H;
+        allegro->star[i].r = rand()%3 + 1;
+    }
+}
 
+
+void DrawStar (int number, Allegro *allegro)
+{
+    int range = allegro->FRAME%60;
+    int range_star = allegro->FRAME%120;
+    for (int i = 0; i < number; i++)
+    {
+        if ( 0 <= range && range < 50)
+            al_draw_filled_circle (allegro->star[i].x, allegro->star[i].y, allegro->star[i].r, al_map_rgb(255, 255, 255));
+    }
+    if ( 115 <= range_star && range_star < 120)
+        InitStar (NUM_STAR, allegro);
+}

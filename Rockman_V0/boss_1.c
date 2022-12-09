@@ -48,5 +48,21 @@ void MoveBoss_1 (Boss_1 *boss_1)
         boss_1->direction = false;
     if (boss_1->x > (WINDOWS_W - 50))
         boss_1->direction = true;
+}
 
+
+
+void BulletCrushBoss_1 (Boss_1 *boss_1, Rockman *rockman)
+{
+    int x = boss_1->x + 50;
+    int y = boss_1->y + 50;
+
+    for (int i = 0; i < NUM_BULLET; i++)
+    {
+        if (rockman->bullet[i].activity)
+        {
+            if ( abs(rockman->bullet[i].x - x) < 50 && abs(rockman->bullet[i].y - y) < 50 )
+                rockman->bullet[i].activity = false;
+        }
+    }
 }

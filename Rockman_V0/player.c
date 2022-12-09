@@ -79,19 +79,41 @@ void DrawRockman (Rockman *rockman, Allegro *allegro)
         al_draw_bitmap_region (rockman->img, 0, 233, 101, 105, rockman->x, rockman->y, rockman->direction);
         break;
 
+    case ATTACK:
+        al_draw_bitmap_region (rockman->img, 467, 118, 109, 105, rockman->x, rockman->y, rockman->direction);
+        break;
     }
 }
+
 
 
 void MoveRockmanInBoss(Rockman *rockman, Allegro *allegro)
 {
     al_get_keyboard_state(&allegro->keyboardState);
 
-    if (rockman->state != JUMP)
+    if (al_key_down(&allegro->keyboardState, ALLEGRO_KEY_RIGHT))
+    {
+        rockman->x = rockman->x + rockman->speed;
+        rockman->direction = false;
+    }
+
+    else if (al_key_down(&allegro->keyboardState, ALLEGRO_KEY_LEFT))
+    {
+        rockman->x = rockman->x - rockman->speed;
+        rockman->direction = true;
+    }
+}
+
+
+
+void RockmanStateInBoss (Rockman *rockman, Allegro *allegro)
+{
+    al_get_keyboard_state(&allegro->keyboardState);
+
+    if (rockman->state != JUMP && rockman->state != ATTACK)
     {
         if (al_key_down(&allegro->keyboardState, ALLEGRO_KEY_RIGHT))
         {
-            rockman->x = rockman->x + rockman->speed;
             rockman->state = RUN_RIGHT;
             rockman->direction = false;
         }
@@ -99,7 +121,6 @@ void MoveRockmanInBoss(Rockman *rockman, Allegro *allegro)
 
         else if (al_key_down(&allegro->keyboardState, ALLEGRO_KEY_LEFT))
         {
-            rockman->x = rockman->x - rockman->speed;
             rockman->state = RUN_LEFT;
             rockman->direction = true;
         }
@@ -111,9 +132,28 @@ void MoveRockmanInBoss(Rockman *rockman, Allegro *allegro)
             rockman->jump_time = JUMP_TIME;
         }
     }
-
-
 }
+
+
+
+void RockmanJumpInBoss (Rockman *rockman, Allegro *allegro)
+{
+        if (rockman->jump_time > JUMP_TIME/2)
+        {
+            rockman->y = rockman->y - 4;
+            rockman->jump_time--;
+        }
+
+        else if ( 0 < rockman->jump_time && rockman->jump_time <= JUMP_TIME/2 )
+        {
+            rockman->y = rockman->y + 4;
+            rockman->jump_time--;
+        }
+
+        else if (rockman->jump_time <= 0)
+            rockman->state = STAND;
+}
+
 
 
 void DrawRockmanHP (Rockman *rockman)
@@ -122,6 +162,5 @@ void DrawRockmanHP (Rockman *rockman)
     {
         al_draw_filled_rectangle (10, 100 - (i*7), 60, 105 - (i*7), al_map_rgb(255, 250, 0));
     }
-  al_draw_filled_rectangle (500, 500 , 550, 550, al_map_rgb(255, 250, 0));
 }
 

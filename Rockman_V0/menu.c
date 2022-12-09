@@ -2,6 +2,8 @@
 
 void DrawMenu (Allegro *allegro)
 {
+    al_clear_to_color (al_map_rgb (0, 0, 0));
+    DrawStar (NUM_STAR, allegro);
     al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 250, 350, 0, "CHOOSE STAGE");
     al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 250, 450, 0, "RULE ");
     al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 250, 550, 0, "EXIT");
@@ -111,3 +113,6 @@ void DrawSaturn (Allegro *allegro)
     else if ( 135 <= range && range < 150)
         al_draw_bitmap_region (allegro->menu.saturn, 4500, 0, 500, 500, x, y, 0);
 }
+
+
+

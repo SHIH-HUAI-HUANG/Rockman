@@ -24,7 +24,7 @@ void AllegroDriverInit(Allegro *allegro)
     al_init_native_dialog_addon();
     al_init_primitives_addon();
     //al_reserve_samples(2);
-
+    srand( time(NULL) );
 
     allegro->display = al_create_display(WINDOWS_W, WINDOWS_H);
     al_set_window_title(allegro->display, " Rockman ");
@@ -48,6 +48,7 @@ void AllegroDriverInit(Allegro *allegro)
     allegro->font_24 = al_load_font("./data/ARIAL.TTF", 24, 0);
     InitStart (allegro);
     InitMenu (allegro);
+    InitStar (NUM_STAR, allegro);
 }
 
 
@@ -89,7 +90,6 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1)
                 case BOSS_1:
                     if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
                     {
-                        printf("space  \n");
                         CreateBullet (rockman);
                     }
 
@@ -99,7 +99,7 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1)
                 break;
 
             case ALLEGRO_EVENT_KEY_UP:
-                rockman->state = STAND;
+                // rockman->state = STAND;
                 break;
 
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
@@ -119,7 +119,6 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1)
                     break;
 
                 case MENU:
-                    al_clear_to_color (al_map_rgb (0, 0, 0));
                     DrawMenu (allegro);
                     break;
 
@@ -131,10 +130,13 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1)
                     break;
 
                 case BOSS_1:
+                    RockmanJumpInBoss (rockman, allegro);
+                    RockmanStateInBoss (rockman, allegro);
                     MoveRockmanInBoss (rockman, allegro);
                     MoveBullet (rockman);
                     MoveBoss_1 (boss_1);
                     CheckBulletOver (rockman);
+                    BulletCrushBoss_1 (boss_1, rockman);
 
                     al_clear_to_color (al_map_rgb (0, 0, 0));
                     DrawBullet (rockman);

@@ -62,6 +62,8 @@ void CheckBulletOver (Rockman *rockman)
     {
         if ((rockman->bullet[i].x > 768) &&  (rockman->bullet[i].activity == true))
             rockman->bullet[i].activity = false;
+        if ((rockman->bullet[i].x < 0) &&  (rockman->bullet[i].activity == true))
+            rockman->bullet[i].activity = false;
     }
 
 }

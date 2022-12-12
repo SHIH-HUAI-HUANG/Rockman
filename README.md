@@ -8,3 +8,4 @@
 - [x] 目前STATE : BOSS、START、MENU
 - [x] 更新START背景
 - [x] Boss-1 人物設置完成、子彈碰撞完成
+- [x] 小關卡的移動、地圖限制完成

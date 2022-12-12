@@ -56,6 +56,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="resource.h" />
+		<Unit filename="small_stage.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="start.c">
 			<Option compilerVar="CC" />
 		</Unit>

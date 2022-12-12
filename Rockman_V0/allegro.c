@@ -49,6 +49,8 @@ void AllegroDriverInit(Allegro *allegro)
     InitStart (allegro);
     InitMenu (allegro);
     InitStar (NUM_STAR, allegro);
+    InitMap (allegro);
+    ReadMapData (allegro);
 }
 
 
@@ -104,6 +106,7 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1)
 
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
                 printf("x = %d, y = %d\n", allegro->events.mouse.x, allegro->events.mouse.y);
+                printf("map = %d \n", allegro->matrix_map[allegro->events.mouse.y][allegro->events.mouse.x + 40]);
                 break;
 
             case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
@@ -127,6 +130,19 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1)
                     break;
 
                 case RULE:
+                    break;
+
+                case SMALL_STAGE:
+
+                    Gravity (allegro, rockman);
+
+                    MoveMap (allegro, rockman);
+                    RockmanJumpInBoss (rockman, allegro);
+                    RockmanStateInSS (rockman, allegro);
+                    MoveRockmanInSS (rockman, allegro);
+
+                    al_draw_bitmap (allegro->map.img, allegro->map.x, allegro->map.y, 0);
+                    DrawRockman (rockman, allegro);
                     break;
 
                 case BOSS_1:

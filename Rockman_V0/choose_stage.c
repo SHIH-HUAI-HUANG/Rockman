@@ -3,6 +3,7 @@
 void DrawChooseStage (Allegro *allegro)
 {
     al_clear_to_color (al_map_rgb (0, 0, 0));
+    DrawStar (NUM_STAR, allegro);
     al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 250, 350, 0, "CLONE");
     al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 250, 450, 0, "BOSS 2");
     al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 250, 550, 0, "BOSS 3");
@@ -56,7 +57,7 @@ void EnterInStage (Allegro *allegro)
         switch (allegro->menu.stage)
         {
         case CLONE:
-            allegro->STATE = BOSS_1;
+            allegro->STATE = SMALL_STAGE;
             break;
 
         case 1:

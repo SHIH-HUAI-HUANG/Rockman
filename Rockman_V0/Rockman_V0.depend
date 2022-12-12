@@ -24,10 +24,10 @@
 1670226638 source:d:\shih-huai\rockman_v0\allegro.c
 	"resource.h"
 
-1670391269 source:d:\shih-huai\final_project\rockman\rockman_v0\main.c
+1670823265 source:d:\shih-huai\final_project\rockman\rockman_v0\main.c
 	"resource.h"
 
-1670563630 d:\shih-huai\final_project\rockman\rockman_v0\resource.h
+1670841816 d:\shih-huai\final_project\rockman\rockman_v0\resource.h
 	<stdlib.h>
 	<stdio.h>
 	<math.h>
@@ -43,10 +43,10 @@
 	<allegro5/allegro_audio.h>
 	<allegro5/allegro_primitives.h>
 
-1670505565 source:d:\shih-huai\final_project\rockman\rockman_v0\player.c
+1670831839 source:d:\shih-huai\final_project\rockman\rockman_v0\player.c
 	"resource.h"
 
-1670563658 source:d:\shih-huai\final_project\rockman\rockman_v0\allegro.c
+1670841239 source:d:\shih-huai\final_project\rockman\rockman_v0\allegro.c
 	"resource.h"
 
 1670505144 source:d:\shih-huai\final_project\rockman\rockman_v0\bullet.c
@@ -58,9 +58,15 @@
 1670563981 source:d:\shih-huai\final_project\rockman\rockman_v0\start.c
 	"resource.h"
 
-1670563529 source:d:\shih-huai\final_project\rockman\rockman_v0\menu.c
+1670564071 source:d:\shih-huai\final_project\rockman\rockman_v0\menu.c
 	"resource.h"
 
-1670426049 source:d:\shih-huai\final_project\rockman\rockman_v0\choose_stage.c
+1670571077 source:d:\shih-huai\final_project\rockman\rockman_v0\choose_stage.c
+	"resource.h"
+
+1670842534 source:d:\shih-huai\final_project\rockman\rockman_v0\small_stage.c
+	"resource.h"
+
+1670843739 source:d:\shih-huai\final_project\rockman\rockman_v0\map.c
 	"resource.h"
 

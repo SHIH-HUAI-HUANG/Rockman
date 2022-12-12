@@ -17,13 +17,28 @@
 
 
 #define WINDOWS_W 768
-#define WINDOWS_H 720
+#define WINDOWS_H 725
 #define FPS 60
 #define SPEED 4
 #define NUM_BULLET 50
 #define JUMP_TIME 60
 #define ATTACK_TIME 15
 #define NUM_STAR 50
+#define ROCKMAN_W 90
+#define ROCKMAN_H 105
+
+
+typedef struct Map
+{
+    int x;
+    int y;
+    int pre_x;
+    int pre_y;
+    int speed;
+    ALLEGRO_BITMAP *img;
+
+} Map;
+
 
 typedef struct Star
 {
@@ -106,6 +121,8 @@ typedef struct Allegro
     Start start;
     Menu menu;
     Star star[NUM_STAR];
+    Map map;
+    int matrix_map[725][6200];
 
 } Allegro;
 
@@ -128,6 +145,7 @@ typedef enum
     RULE,
     STAGE,
     GAME,
+    SMALL_STAGE,
     BOSS_1
 
 } State_game;
@@ -208,5 +226,14 @@ void EnterInStage (Allegro *allegro);
 
 
 
+/** Map */
+void InitMap (Allegro *allegro);
+void ReadMapData (Allegro *allegro);
+void Gravity (Allegro *allegro, Rockman *rockman);
+void MoveMap(Allegro *allegro, Rockman *rockman);
 
+
+/** small stage */
+void MoveRockmanInSS(Rockman *rockman, Allegro *allegro);
+void RockmanStateInSS (Rockman *rockman, Allegro *allegro);
 

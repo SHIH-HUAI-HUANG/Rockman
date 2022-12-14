@@ -55,7 +55,7 @@ void AllegroDriverInit(Allegro *allegro)
 
 
 
-void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1)
+void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1, Monster *monster)
 {
     if (!al_is_event_queue_empty(allegro->event_queue))
     {
@@ -83,7 +83,7 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1)
 
                 case STAGE:
                     MoveArrowInStage (allegro);
-                    EnterInStage (allegro);
+                    EnterInStage (allegro, rockman);
                     break;
 
                 case RULE:
@@ -91,17 +91,18 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1)
 
                 case BOSS_1:
                     if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
-                    {
                         CreateBullet (rockman);
-                    }
+                    break;
 
+                case SMALL_STAGE:
+                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
+                        CreateBullet (rockman);
                     break;
 
                 }
                 break;
 
             case ALLEGRO_EVENT_KEY_UP:
-                // rockman->state = STAND;
                 break;
 
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
@@ -133,16 +134,29 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1)
                     break;
 
                 case SMALL_STAGE:
-
+                    rockman->state = STAND;
                     Gravity (allegro, rockman);
+                    DropInAbyss (rockman, allegro);
 
                     MoveMap (allegro, rockman);
-                    RockmanJumpInBoss (rockman, allegro);
                     RockmanStateInSS (rockman, allegro);
                     MoveRockmanInSS (rockman, allegro);
+                    MoveBullet (rockman);
+                    CheckBulletOver (rockman);
+                    MoveSkull (monster);
+                    MoveFireSkull (monster);
+                    BulletCrushMonster (monster, rockman, allegro);
+                    MonsterCrushRockman (monster, rockman, allegro);
 
                     al_draw_bitmap (allegro->map.img, allegro->map.x, allegro->map.y, 0);
+                    DrawDoorInSS (allegro);
+                    DrawBullet (rockman);
                     DrawRockman (rockman, allegro);
+                    //DrawMonster (monster, allegro);
+                    DrawSkull (monster, allegro);
+                    DrawFireSkull (monster, allegro);
+                    DrawRockmanHP (rockman);
+                    PassSmallStage (rockman, allegro);
                     break;
 
                 case BOSS_1:
@@ -161,6 +175,14 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1)
                     DrawRockmanHP (rockman);
                     break;
 
+                case LOADING:
+                    LoadingFinish (allegro);
+                    DrawLoading (allegro);
+                    break;
+
+                case CONTINUE:
+                    DrawGameFinish (allegro);
+                    break;
                 }
 
 

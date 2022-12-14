@@ -49,7 +49,7 @@ void DrawArrowInStage (Allegro *allegro)
 }
 
 
-void EnterInStage (Allegro *allegro)
+void EnterInStage (Allegro *allegro, Rockman *rockman)
 {
     al_get_keyboard_state(&allegro->keyboardState);
     if ( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_ENTER) )
@@ -58,6 +58,9 @@ void EnterInStage (Allegro *allegro)
         {
         case CLONE:
             allegro->STATE = SMALL_STAGE;
+            allegro->boss_stage = CLONE;
+            InitRockman(rockman);
+            InitMap (allegro);
             break;
 
         case 1:

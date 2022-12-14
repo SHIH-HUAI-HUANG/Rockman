@@ -26,6 +26,7 @@
 #define NUM_STAR 50
 #define ROCKMAN_W 90
 #define ROCKMAN_H 105
+#define NUM_MONSTER 10
 
 
 typedef struct Map
@@ -57,6 +58,21 @@ typedef struct Bullet
 
 } Bullet;
 
+typedef struct Monster
+{
+    int x;
+    int y;
+    int standard_x;
+    int standard_y;
+    int speed;
+    int delta_x;
+    bool direction;
+    bool direction_y;
+    bool alive;
+    int role;
+
+    ALLEGRO_BITMAP *img;
+} Monster;
 
 typedef struct Rockman
 {
@@ -117,6 +133,8 @@ typedef struct Allegro
     bool finish;
     int FRAME;
     int STATE;
+    int frame_flag;
+    int boss_stage;
 
     Start start;
     Menu menu;
@@ -146,7 +164,9 @@ typedef enum
     STAGE,
     GAME,
     SMALL_STAGE,
-    BOSS_1
+    BOSS_1,
+    LOADING,
+    CONTINUE
 
 } State_game;
 
@@ -172,7 +192,7 @@ typedef enum
 /** allegro */
 Allegro *CallocAllegro();
 void AllegroDriverInit(Allegro *allegro);
-void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1);
+void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1, Monster *monster);
 
 
 /** rockman */
@@ -222,7 +242,7 @@ void EnterInMenu (Allegro *allegro);
 void DrawChooseStage (Allegro *allegro);
 void MoveArrowInStage (Allegro *allegro);
 void DrawArrowInStage (Allegro *allegro);
-void EnterInStage (Allegro *allegro);
+void EnterInStage (Allegro *allegro, Rockman *rockman);
 
 
 
@@ -236,4 +256,32 @@ void MoveMap(Allegro *allegro, Rockman *rockman);
 /** small stage */
 void MoveRockmanInSS(Rockman *rockman, Allegro *allegro);
 void RockmanStateInSS (Rockman *rockman, Allegro *allegro);
+void DropInAbyss (Rockman *rockman, Allegro *allegro);
+void DrawDoorInSS (Allegro* allegro);
+void PassSmallStage (Rockman *rockman, Allegro *allegro);
+
+
+/** Loading */
+void DrawLoading (Allegro *allegro);
+void DrawProgressBar (Allegro *allegro);
+void LoadingFinish (Allegro *allegro);
+
+
+
+/** Game finish */
+void DrawGameFinish (Allegro *allegro);
+void DrawContinue (Allegro *allegro);
+
+
+
+/** Monster */
+Monster *CallocMonster (int number);
+void InitMonster (Monster *monster);
+void DrawMonster (Monster *monster, Allegro *allegro);
+void MoveSkull (Monster *monster);
+void DrawSkull (Monster *monster, Allegro *allegro);
+void MoveFireSkull (Monster *monster);
+void DrawFireSkull (Monster *monster, Allegro *allegro);
+void BulletCrushMonster (Monster *monster, Rockman *rockman, Allegro *allegro);
+void MonsterCrushRockman (Monster *monster, Rockman *rockman, Allegro *allegro);
 

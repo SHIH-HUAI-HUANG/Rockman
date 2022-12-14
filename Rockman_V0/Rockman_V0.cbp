@@ -43,6 +43,12 @@
 		<Unit filename="choose_stage.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="game_finish.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="loading.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -50,6 +56,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="monster.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="player.c">

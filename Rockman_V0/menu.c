@@ -4,9 +4,9 @@ void DrawMenu (Allegro *allegro)
 {
     al_clear_to_color (al_map_rgb (0, 0, 0));
     DrawStar (NUM_STAR, allegro);
-    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 250, 350, 0, "CHOOSE STAGE");
-    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 250, 450, 0, "RULE ");
-    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 250, 550, 0, "EXIT");
+    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 300, 350, 0, "CHOOSE STAGE");
+    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 300, 450, 0, "RULE ");
+    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 300, 550, 0, "EXIT");
     DrawArrowInMenu (allegro);
     DrawSaturn (allegro);
 }
@@ -32,15 +32,15 @@ void DrawArrowInMenu (Allegro *allegro)
     switch (allegro->menu.state)
     {
     case M_CHOOSE_STAGE:
-        al_draw_bitmap(allegro->menu.icon_right, 200, 350, 0);
+        al_draw_bitmap(allegro->menu.icon_right, 200, 340, 0);
         break;
 
     case M_RULE:
-        al_draw_bitmap(allegro->menu.icon_right, 200, 450, 0);
+        al_draw_bitmap(allegro->menu.icon_right, 200, 440, 0);
         break;
 
     case M_EXIT:
-        al_draw_bitmap(allegro->menu.icon_right, 200, 550, 0);
+        al_draw_bitmap(allegro->menu.icon_right, 200, 540, 0);
         break;
 
     }

@@ -24,10 +24,10 @@
 1670226638 source:d:\shih-huai\rockman_v0\allegro.c
 	"resource.h"
 
-1670823265 source:d:\shih-huai\final_project\rockman\rockman_v0\main.c
+1670930512 source:d:\shih-huai\final_project\rockman\rockman_v0\main.c
 	"resource.h"
 
-1670841816 d:\shih-huai\final_project\rockman\rockman_v0\resource.h
+1670954323 d:\shih-huai\final_project\rockman\rockman_v0\resource.h
 	<stdlib.h>
 	<stdio.h>
 	<math.h>
@@ -43,13 +43,13 @@
 	<allegro5/allegro_audio.h>
 	<allegro5/allegro_primitives.h>
 
-1670831839 source:d:\shih-huai\final_project\rockman\rockman_v0\player.c
+1670953670 source:d:\shih-huai\final_project\rockman\rockman_v0\player.c
 	"resource.h"
 
-1670841239 source:d:\shih-huai\final_project\rockman\rockman_v0\allegro.c
+1670954468 source:d:\shih-huai\final_project\rockman\rockman_v0\allegro.c
 	"resource.h"
 
-1670505144 source:d:\shih-huai\final_project\rockman\rockman_v0\bullet.c
+1670912217 source:d:\shih-huai\final_project\rockman\rockman_v0\bullet.c
 	"resource.h"
 
 1670505486 source:d:\shih-huai\final_project\rockman\rockman_v0\boss_1.c
@@ -58,15 +58,24 @@
 1670563981 source:d:\shih-huai\final_project\rockman\rockman_v0\start.c
 	"resource.h"
 
-1670564071 source:d:\shih-huai\final_project\rockman\rockman_v0\menu.c
+1670860333 source:d:\shih-huai\final_project\rockman\rockman_v0\menu.c
 	"resource.h"
 
-1670571077 source:d:\shih-huai\final_project\rockman\rockman_v0\choose_stage.c
+1670953884 source:d:\shih-huai\final_project\rockman\rockman_v0\choose_stage.c
 	"resource.h"
 
-1670842534 source:d:\shih-huai\final_project\rockman\rockman_v0\small_stage.c
+1670954309 source:d:\shih-huai\final_project\rockman\rockman_v0\small_stage.c
 	"resource.h"
 
-1670843739 source:d:\shih-huai\final_project\rockman\rockman_v0\map.c
+1670950674 source:d:\shih-huai\final_project\rockman\rockman_v0\map.c
+	"resource.h"
+
+1670910716 source:d:\shih-huai\final_project\rockman\rockman_v0\loading.c
+	"resource.h"
+
+1670911197 source:d:\shih-huai\final_project\rockman\rockman_v0\game_finish.c
+	"resource.h"
+
+1670953547 source:d:\shih-huai\final_project\rockman\rockman_v0\monster.c
 	"resource.h"
 

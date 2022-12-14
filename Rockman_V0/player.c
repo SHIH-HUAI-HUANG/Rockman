@@ -34,8 +34,6 @@ void InitRockman (Rockman *rockman)
 
 void DrawRockman (Rockman *rockman, Allegro *allegro)
 {
-    al_draw_filled_circle(rockman->x, rockman->y, 4, al_map_rgb(255, 0,0));//test
-    al_draw_filled_circle(rockman->x, rockman->y + 106, 4, al_map_rgb(0, 255,0));//test
     int range = allegro->FRAME%32;
     int range_stand = allegro->FRAME%120;
 
@@ -140,7 +138,7 @@ void RockmanStateInBoss (Rockman *rockman, Allegro *allegro)
 
 void RockmanJumpInBoss (Rockman *rockman, Allegro *allegro)
 {
-
+printf ("jump\n");
 
     if (rockman->jump_time > JUMP_TIME/2)
     {
@@ -157,8 +155,8 @@ void RockmanJumpInBoss (Rockman *rockman, Allegro *allegro)
     else if (rockman->jump_time <= 0)
         rockman->state = STAND;
 
-       if (allegro->matrix_map[rockman->y + 106][rockman->x + abs(allegro->map.x)] == 0)
-        rockman->jump_time = 0;
+      /* if (allegro->matrix_map[rockman->y + 106][rockman->x + abs(allegro->map.x)] == 0)
+        rockman->jump_time = 0;*/
 }
 
 
@@ -170,4 +168,5 @@ void DrawRockmanHP (Rockman *rockman)
         al_draw_filled_rectangle (10, 100 - (i*7), 60, 105 - (i*7), al_map_rgb(255, 250, 0));
     }
 }
+
 

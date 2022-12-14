@@ -24,7 +24,6 @@ void CreateBullet (Rockman *rockman)
     rockman->bullet[number].x = rockman->x + 50;
     rockman->bullet[number].y = rockman->y + 50;
     rockman->bullet[number].direction = rockman->direction;
-    printf("1111\n");
 }
 
 

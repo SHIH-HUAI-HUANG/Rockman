@@ -8,13 +8,13 @@ int main()
     InitRockman (rockman);
     Boss_1 *boss_1 = CallocBoss_1();
     InitBoss_1 (boss_1);
-
+    Monster *monster = CallocMonster (NUM_MONSTER);
+    InitMonster (monster);
 
 
     while(!allegro->finish)
     {
-
-        EventCheck(allegro, rockman, boss_1);
+        EventCheck(allegro, rockman, boss_1, monster);
         al_flip_display();
     }
 

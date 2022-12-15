@@ -29,6 +29,19 @@
 #define NUM_MONSTER 10
 
 
+typedef struct Minion
+{
+    int x;
+    int y;
+    int speed_x;
+    int speed_y;
+    bool direction_x;
+    bool direction_y;
+    ALLEGRO_BITMAP *img;
+
+} Minion;
+
+
 typedef struct Map
 {
     int x;
@@ -90,6 +103,7 @@ typedef struct Rockman
 
 } Rockman;
 
+
 typedef struct Boss_1
 {
     int x;
@@ -101,9 +115,26 @@ typedef struct Boss_1
 
     bool direction;
     ALLEGRO_BITMAP *img;
+    ALLEGRO_BITMAP *background;
     Bullet bullet[NUM_BULLET];
 
+    Minion minion;
+
 } Boss_1;
+
+
+typedef struct Boss_2
+{
+    int x;
+    int y;
+    int speed;
+    int state;
+    int HP;
+    bool direction;
+    ALLEGRO_BITMAP *img;
+    ALLEGRO_BITMAP *background;
+} Boss_2;
+
 
 typedef struct Start
 {
@@ -203,6 +234,7 @@ void RockmanStateInBoss (Rockman *rockman, Allegro *allegro);
 void MoveRockmanInBoss(Rockman *rockman, Allegro *allegro);
 void RockmanJumpInBoss (Rockman *rockman, Allegro *allegro);
 void DrawRockmanHP (Rockman *rockman);
+void CheckAlive (Rockman *rockman, Allegro *allegro);
 
 
 void CreateBullet (Rockman *rockman);
@@ -217,6 +249,13 @@ void InitBoss_1 (Boss_1 *boss_1);
 void DrawBoss_1 (Boss_1 *boss_1, Allegro *allegro);
 void MoveBoss_1 (Boss_1 *boss_1);
 void BulletCrushBoss_1 (Boss_1 *boss_1, Rockman *rockman);
+void InitRockmanInBoss_1 (Rockman * rockman);
+void RockmanCollideBoss_1 (Rockman *rockman, Boss_1 *boss_1);
+void DrawMinion (Boss_1 *boss_1, Allegro *allegro);
+void MoveMinion (Boss_1 *boss_1);
+void DrawBoss_1HP (Boss_1 *boss_1);
+void CheckBoss_1Alive (Boss_1 *boss_1, Allegro *allegro);
+void RockmanCollideMinion (Rockman *rockman, Boss_1 *boss_1);
 
 
 /** Start */
@@ -239,10 +278,11 @@ void EnterInMenu (Allegro *allegro);
 
 
 /** choose stage */
-void DrawChooseStage (Allegro *allegro);
+void DrawChooseStage (Allegro *allegro, Boss_1 *boss_1);
 void MoveArrowInStage (Allegro *allegro);
-void DrawArrowInStage (Allegro *allegro);
-void EnterInStage (Allegro *allegro, Rockman *rockman);
+void DrawArrowInStage (Allegro *allegro, Boss_1 *boss_1);
+void EnterInStage (Allegro *allegro, Rockman *rockman, Boss_1 *boss_1);
+void DrawCopymanInStage (Boss_1 *boss_1, Allegro *allegro);
 
 
 
@@ -269,7 +309,7 @@ void LoadingFinish (Allegro *allegro);
 
 
 /** Game finish */
-void DrawGameFinish (Allegro *allegro);
+void DrawGameFinish (Allegro *allegro, Rockman *rockman);
 void DrawContinue (Allegro *allegro);
 
 

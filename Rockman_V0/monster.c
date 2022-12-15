@@ -195,7 +195,7 @@ void BulletCrushMonster (Monster *monster, Rockman *rockman, Allegro *allegro)
         {
             if (rockman->bullet[j].activity)
             {
-                if ( abs(rockman->bullet[j].x - monster[i].x - 54 - allegro->map.x) < 54 && abs(rockman->bullet[j].y - monster[i].y - 35 - allegro->map.y) < 35 )
+                if ( abs(rockman->bullet[j].x - monster[i].x - 54 - allegro->map.x) < 44 && abs(rockman->bullet[j].y - monster[i].y - 35 - allegro->map.y) < 25 )
                     monster[i].alive = false;
             }
         }
@@ -207,7 +207,7 @@ void BulletCrushMonster (Monster *monster, Rockman *rockman, Allegro *allegro)
         {
             if (rockman->bullet[j].activity)
             {
-                if ( abs(rockman->bullet[j].x - monster[i].x - 96 - allegro->map.x) < 96 && abs(rockman->bullet[j].y - monster[i].y - 56 - allegro->map.y) < 56 )
+                if ( abs(rockman->bullet[j].x - monster[i].x - 96 - allegro->map.x) < 86 && abs(rockman->bullet[j].y - monster[i].y - 56 - allegro->map.y) < 46 )
                     monster[i].alive = false;
             }
         }
@@ -222,12 +222,12 @@ void MonsterCrushRockman (Monster *monster, Rockman *rockman, Allegro *allegro)
 
     for (int i = 0; i < 5; i++)
     {
-        if ( abs(x - monster[i].x - 54 - allegro->map.x) < (54 + ROCKMAN_W/2) && abs(y - monster[i].y - 35 - allegro->map.y) < (35 + ROCKMAN_H/2) && monster[i].alive)
+        if ( abs(x - monster[i].x - 54 - allegro->map.x) < (44 + ROCKMAN_W/2) && abs(y - monster[i].y - 35 - allegro->map.y) < (25 + ROCKMAN_H/2) && monster[i].alive)
             rockman->HP--;
     }
     for (int i = 5; i < 10; i++)
     {
-        if ( abs(x - monster[i].x - 96 - allegro->map.x) < (96 + ROCKMAN_W/2) && abs(y - monster[i].y - 56 - allegro->map.y) < (56 + ROCKMAN_H/2) && monster[i].alive)
+        if ( abs(x - monster[i].x - 96 - allegro->map.x) < (86 + ROCKMAN_W/2) && abs(y - monster[i].y - 56 - allegro->map.y) < (46 + ROCKMAN_H/2) && monster[i].alive)
             rockman->HP--;
     }
 }

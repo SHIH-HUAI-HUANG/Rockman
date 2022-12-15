@@ -102,7 +102,10 @@ void PassSmallStage (Rockman *rockman, Allegro *allegro)
             allegro->STATE = BOSS_1;
             break;
         }
+       InitRockmanInBoss_1 (rockman);
     }
-
 }
+
+
+
 

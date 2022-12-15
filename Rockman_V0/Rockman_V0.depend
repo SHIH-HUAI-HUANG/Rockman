@@ -27,7 +27,7 @@
 1670930512 source:d:\shih-huai\final_project\rockman\rockman_v0\main.c
 	"resource.h"
 
-1670954323 d:\shih-huai\final_project\rockman\rockman_v0\resource.h
+1671039176 d:\shih-huai\final_project\rockman\rockman_v0\resource.h
 	<stdlib.h>
 	<stdio.h>
 	<math.h>
@@ -43,16 +43,16 @@
 	<allegro5/allegro_audio.h>
 	<allegro5/allegro_primitives.h>
 
-1670953670 source:d:\shih-huai\final_project\rockman\rockman_v0\player.c
+1671038435 source:d:\shih-huai\final_project\rockman\rockman_v0\player.c
 	"resource.h"
 
-1670954468 source:d:\shih-huai\final_project\rockman\rockman_v0\allegro.c
+1671039185 source:d:\shih-huai\final_project\rockman\rockman_v0\allegro.c
 	"resource.h"
 
 1670912217 source:d:\shih-huai\final_project\rockman\rockman_v0\bullet.c
 	"resource.h"
 
-1670505486 source:d:\shih-huai\final_project\rockman\rockman_v0\boss_1.c
+1671038971 source:d:\shih-huai\final_project\rockman\rockman_v0\boss_1.c
 	"resource.h"
 
 1670563981 source:d:\shih-huai\final_project\rockman\rockman_v0\start.c
@@ -61,10 +61,10 @@
 1670860333 source:d:\shih-huai\final_project\rockman\rockman_v0\menu.c
 	"resource.h"
 
-1670953884 source:d:\shih-huai\final_project\rockman\rockman_v0\choose_stage.c
+1671039067 source:d:\shih-huai\final_project\rockman\rockman_v0\choose_stage.c
 	"resource.h"
 
-1670954309 source:d:\shih-huai\final_project\rockman\rockman_v0\small_stage.c
+1671024018 source:d:\shih-huai\final_project\rockman\rockman_v0\small_stage.c
 	"resource.h"
 
 1670950674 source:d:\shih-huai\final_project\rockman\rockman_v0\map.c
@@ -73,9 +73,9 @@
 1670910716 source:d:\shih-huai\final_project\rockman\rockman_v0\loading.c
 	"resource.h"
 
-1670911197 source:d:\shih-huai\final_project\rockman\rockman_v0\game_finish.c
+1671023964 source:d:\shih-huai\final_project\rockman\rockman_v0\game_finish.c
 	"resource.h"
 
-1670953547 source:d:\shih-huai\final_project\rockman\rockman_v0\monster.c
+1671036036 source:d:\shih-huai\final_project\rockman\rockman_v0\monster.c
 	"resource.h"
 

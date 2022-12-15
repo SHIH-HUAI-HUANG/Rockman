@@ -83,7 +83,7 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1, Monster *mon
 
                 case STAGE:
                     MoveArrowInStage (allegro);
-                    EnterInStage (allegro, rockman);
+                    EnterInStage (allegro, rockman, boss_1);
                     break;
 
                 case RULE:
@@ -127,7 +127,7 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1, Monster *mon
                     break;
 
                 case STAGE:
-                    DrawChooseStage (allegro);
+                    DrawChooseStage (allegro, boss_1);
                     break;
 
                 case RULE:
@@ -157,6 +157,7 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1, Monster *mon
                     DrawFireSkull (monster, allegro);
                     DrawRockmanHP (rockman);
                     PassSmallStage (rockman, allegro);
+                    CheckAlive (rockman, allegro);
                     break;
 
                 case BOSS_1:
@@ -167,12 +168,19 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1, Monster *mon
                     MoveBoss_1 (boss_1);
                     CheckBulletOver (rockman);
                     BulletCrushBoss_1 (boss_1, rockman);
+                    RockmanCollideBoss_1 (rockman, boss_1);
+                    MoveMinion (boss_1);
 
-                    al_clear_to_color (al_map_rgb (0, 0, 0));
+                    al_draw_bitmap (boss_1->background, 0, 0, 0);
                     DrawBullet (rockman);
                     DrawRockman (rockman, allegro);
                     DrawBoss_1 (boss_1, allegro);
                     DrawRockmanHP (rockman);
+                    DrawMinion (boss_1, allegro);
+                    DrawBoss_1HP (boss_1);
+
+                    CheckAlive (rockman, allegro);
+                    CheckBoss_1Alive (boss_1, allegro);
                     break;
 
                 case LOADING:
@@ -181,7 +189,7 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1, Monster *mon
                     break;
 
                 case CONTINUE:
-                    DrawGameFinish (allegro);
+                    DrawGameFinish (allegro, rockman);
                     break;
                 }
 

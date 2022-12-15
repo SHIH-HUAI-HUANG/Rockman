@@ -5,10 +5,15 @@ And press enter to continue.
 */
 
 
-void DrawGameFinish (Allegro *allegro)
+void DrawGameFinish (Allegro *allegro, Rockman *rockman)
 {
     al_clear_to_color (al_map_rgb (255, 255, 255));
     DrawContinue (allegro);
+
+    if (rockman->HP <= 0)
+        al_draw_textf(allegro->font_24, al_map_rgb(0, 0, 0), 390, 400, 1, "Loser");
+    else if (rockman->HP > 0)
+        al_draw_textf(allegro->font_24, al_map_rgb(0, 0, 0), 390, 400, 1, "Pass");
 
     al_get_keyboard_state(&allegro->keyboardState);
     if ( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_ENTER) )

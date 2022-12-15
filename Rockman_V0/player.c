@@ -18,7 +18,7 @@ void InitRockman (Rockman *rockman)
     rockman->speed = SPEED;
     rockman->state = STAND;
     rockman->jump_time = -1;
-    rockman->HP = 10;
+    rockman->HP = 100;
 
 
     for (int i = 0; i < NUM_BULLET; i++)
@@ -138,7 +138,7 @@ void RockmanStateInBoss (Rockman *rockman, Allegro *allegro)
 
 void RockmanJumpInBoss (Rockman *rockman, Allegro *allegro)
 {
-printf ("jump\n");
+    printf ("jump\n");
 
     if (rockman->jump_time > JUMP_TIME/2)
     {
@@ -155,8 +155,8 @@ printf ("jump\n");
     else if (rockman->jump_time <= 0)
         rockman->state = STAND;
 
-      /* if (allegro->matrix_map[rockman->y + 106][rockman->x + abs(allegro->map.x)] == 0)
-        rockman->jump_time = 0;*/
+    /* if (allegro->matrix_map[rockman->y + 106][rockman->x + abs(allegro->map.x)] == 0)
+      rockman->jump_time = 0;*/
 }
 
 
@@ -165,8 +165,18 @@ void DrawRockmanHP (Rockman *rockman)
 {
     for (int i = 0; i < rockman->HP; i++)
     {
-        al_draw_filled_rectangle (10, 100 - (i*7), 60, 105 - (i*7), al_map_rgb(255, 250, 0));
+        al_draw_filled_rectangle (10, 200 - (i*7), 60, 205 - (i*7), al_map_rgb(255, 250, 0));
     }
 }
 
+
+
+void CheckAlive (Rockman *rockman, Allegro *allegro)
+{
+    if (rockman->HP <= 0)
+    {
+        allegro->STATE = LOADING;
+        allegro->frame_flag = allegro->FRAME;
+    }
+}
 

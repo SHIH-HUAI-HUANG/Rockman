@@ -24,10 +24,10 @@
 1670226638 source:d:\shih-huai\rockman_v0\allegro.c
 	"resource.h"
 
-1670930512 source:d:\shih-huai\final_project\rockman\rockman_v0\main.c
+1671169890 source:d:\shih-huai\final_project\rockman\rockman_v0\main.c
 	"resource.h"
 
-1671039176 d:\shih-huai\final_project\rockman\rockman_v0\resource.h
+1671259864 d:\shih-huai\final_project\rockman\rockman_v0\resource.h
 	<stdlib.h>
 	<stdio.h>
 	<math.h>
@@ -43,16 +43,16 @@
 	<allegro5/allegro_audio.h>
 	<allegro5/allegro_primitives.h>
 
-1671038435 source:d:\shih-huai\final_project\rockman\rockman_v0\player.c
+1671108459 source:d:\shih-huai\final_project\rockman\rockman_v0\player.c
 	"resource.h"
 
-1671039185 source:d:\shih-huai\final_project\rockman\rockman_v0\allegro.c
+1671258379 source:d:\shih-huai\final_project\rockman\rockman_v0\allegro.c
 	"resource.h"
 
-1670912217 source:d:\shih-huai\final_project\rockman\rockman_v0\bullet.c
+1671107758 source:d:\shih-huai\final_project\rockman\rockman_v0\bullet.c
 	"resource.h"
 
-1671038971 source:d:\shih-huai\final_project\rockman\rockman_v0\boss_1.c
+1671108960 source:d:\shih-huai\final_project\rockman\rockman_v0\boss_1.c
 	"resource.h"
 
 1670563981 source:d:\shih-huai\final_project\rockman\rockman_v0\start.c
@@ -61,10 +61,10 @@
 1670860333 source:d:\shih-huai\final_project\rockman\rockman_v0\menu.c
 	"resource.h"
 
-1671039067 source:d:\shih-huai\final_project\rockman\rockman_v0\choose_stage.c
+1671260110 source:d:\shih-huai\final_project\rockman\rockman_v0\choose_stage.c
 	"resource.h"
 
-1671024018 source:d:\shih-huai\final_project\rockman\rockman_v0\small_stage.c
+1671259978 source:d:\shih-huai\final_project\rockman\rockman_v0\small_stage.c
 	"resource.h"
 
 1670950674 source:d:\shih-huai\final_project\rockman\rockman_v0\map.c
@@ -77,5 +77,11 @@
 	"resource.h"
 
 1671036036 source:d:\shih-huai\final_project\rockman\rockman_v0\monster.c
+	"resource.h"
+
+1671256919 source:d:\shih-huai\final_project\rockman\rockman_v0\boss_2.c
+	"resource.h"
+
+1671250516 source:d:\shih-huai\final_project\rockman\rockman_v0\boss_3.c
 	"resource.h"
 

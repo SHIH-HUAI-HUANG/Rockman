@@ -37,6 +37,12 @@
 		<Unit filename="boss_1.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="boss_2.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="boss_3.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="bullet.c">
 			<Option compilerVar="CC" />
 		</Unit>

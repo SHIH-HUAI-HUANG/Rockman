@@ -1,5 +1,5 @@
 #include "resource.h"
-/** The Boss 1 is called "CopyMan" */
+/** The Boss 1 is called "CopyMan - X" */
 
 
 /** Function : Memery allocation for struct of Boss_1 */
@@ -217,7 +217,6 @@ void DrawBoss_1HP (Boss_1 *boss_1)
         al_draw_filled_rectangle (668, 200 - (i*7), 718, 205 - (i*7), al_map_rgb(255, 0, 0));
     }
 }
-
 
 
 void CheckBoss_1Alive (Boss_1 *boss_1, Allegro *allegro)

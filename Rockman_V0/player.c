@@ -180,3 +180,13 @@ void CheckAlive (Rockman *rockman, Allegro *allegro)
     }
 }
 
+
+
+void LimitRockmanInBoss (Rockman *rockman)
+{
+    if (rockman->x < 0)
+        rockman->x = 0;
+    if (rockman->x > 678)
+        rockman->x = 678;
+}
+

@@ -100,9 +100,18 @@ void PassSmallStage (Rockman *rockman, Allegro *allegro)
         {
         case CLONE:
             allegro->STATE = BOSS_1;
+            InitRockmanInBoss_1 (rockman);
+            break;
+
+            case NECROMANCER:
+            allegro->STATE = BOSS_2;
+            InitRockmanInBoss_2 (rockman);
+            break;
+
+            case XAIYA:
+            allegro->STATE = BOSS_3;
             break;
         }
-       InitRockmanInBoss_1 (rockman);
     }
 }
 

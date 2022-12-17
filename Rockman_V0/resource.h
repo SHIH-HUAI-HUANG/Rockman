@@ -131,9 +131,32 @@ typedef struct Boss_2
     int state;
     int HP;
     bool direction;
-    ALLEGRO_BITMAP *img;
+    ALLEGRO_BITMAP *img_idle;
+    ALLEGRO_BITMAP *img_attack;
     ALLEGRO_BITMAP *background;
+
+    int time_idle;
+    int time_attack;
 } Boss_2;
+
+
+
+typedef struct Boss_3
+{
+    int x;
+    int y;
+    int speed_x;
+    int speed_y;
+    int state;
+    int HP;
+    bool direction_x;
+    bool direction_y;
+    ALLEGRO_BITMAP *img_idle;
+    ALLEGRO_BITMAP *img_attack;
+    ALLEGRO_BITMAP *background;
+    ALLEGRO_BITMAP *explosion;
+
+} Boss_3;
 
 
 typedef struct Start
@@ -187,6 +210,8 @@ typedef enum
 
 } State_rockman;
 
+
+
 typedef enum
 {
     START,
@@ -196,6 +221,8 @@ typedef enum
     GAME,
     SMALL_STAGE,
     BOSS_1,
+    BOSS_2,
+    BOSS_3,
     LOADING,
     CONTINUE
 
@@ -213,8 +240,8 @@ typedef enum
 typedef enum
 {
     CLONE,
-    BOSS_2,
-    BOSS_3
+    NECROMANCER,
+    XAIYA
 
 } State_Stage;
 
@@ -223,8 +250,7 @@ typedef enum
 /** allegro */
 Allegro *CallocAllegro();
 void AllegroDriverInit(Allegro *allegro);
-void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1, Monster *monster);
-
+void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *boss_1, Boss_2 *boss_2, Boss_3 *boss_3);
 
 /** rockman */
 Rockman *CallocRockman();
@@ -235,6 +261,7 @@ void MoveRockmanInBoss(Rockman *rockman, Allegro *allegro);
 void RockmanJumpInBoss (Rockman *rockman, Allegro *allegro);
 void DrawRockmanHP (Rockman *rockman);
 void CheckAlive (Rockman *rockman, Allegro *allegro);
+void LimitRockmanInBoss (Rockman *rockman);
 
 
 void CreateBullet (Rockman *rockman);
@@ -278,11 +305,13 @@ void EnterInMenu (Allegro *allegro);
 
 
 /** choose stage */
-void DrawChooseStage (Allegro *allegro, Boss_1 *boss_1);
+void DrawChooseStage (Allegro *allegro, Boss_1 *boss_1, Boss_2 *boss_2, Boss_3 *boss_3);
 void MoveArrowInStage (Allegro *allegro);
-void DrawArrowInStage (Allegro *allegro, Boss_1 *boss_1);
-void EnterInStage (Allegro *allegro, Rockman *rockman, Boss_1 *boss_1);
+void DrawArrowInStage (Allegro *allegro, Boss_1 *boss_1, Boss_2 *boss_2, Boss_3 *boss_3);
+void EnterInStage (Allegro *allegro, Rockman *rockman, Monster *monster);
 void DrawCopymanInStage (Boss_1 *boss_1, Allegro *allegro);
+void DrawNecromancerInStage (Boss_2 *boss_2, Allegro *allegro);
+void DrawXaiYaInStage (Boss_3 *boss_3, Allegro *allegro);
 
 
 
@@ -325,3 +354,23 @@ void DrawFireSkull (Monster *monster, Allegro *allegro);
 void BulletCrushMonster (Monster *monster, Rockman *rockman, Allegro *allegro);
 void MonsterCrushRockman (Monster *monster, Rockman *rockman, Allegro *allegro);
 
+
+/** Necromancer / Boss 2 */
+Boss_2 *CallocBoss_2();
+void InitBoss_2 (Boss_2 *boss_2);
+void DrawBoss_2 (Boss_2 *boss_2, Allegro *allegro, Rockman *rockman);
+void MoveBoss_2 (Boss_2 *boss_2, Rockman *rockman);
+void StateBoss_2 (Boss_2 *boss_2, Allegro *allegro, Rockman *rockman);
+void BulletCollideBoss_2 (Rockman *rockman, Boss_2 *boss_2);
+void DrawBoss_2HP (Boss_2 *boss_2);
+void CheckBoss_2Alive (Boss_2 *boss_2, Allegro *allegro);
+void InitRockmanInBoss_2 (Rockman *rockman);
+void CheckAOEBoss_2 (Boss_2 *boss_2, Rockman *rockman);
+
+
+/** XaiYa / Boss 3 */
+Boss_3 *CallocBoss_3();
+void InitBoss_3 (Boss_3 *boss_3);
+void DrawBoss_3 (Boss_3 *boss_3, Allegro *allegro);
+void MoveNormalYA (Boss_3 *boss_3);
+void DrawExplosion (Boss_3 *boss_3, Allegro *allegro);

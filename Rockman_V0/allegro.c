@@ -45,7 +45,7 @@ void AllegroDriverInit(Allegro *allegro)
     allegro->menu.state = M_CHOOSE_STAGE;
     allegro->menu.stage = CLONE;
 
-    allegro->font_24 = al_load_font("./data/ARIAL.TTF", 24, 0);
+    allegro->font_24 = al_load_font("./data/m5x7.ttf", 48, 0);
     InitStart (allegro);
     InitMenu (allegro);
     InitStar (NUM_STAR, allegro);
@@ -55,7 +55,7 @@ void AllegroDriverInit(Allegro *allegro)
 
 
 
-void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1, Monster *monster)
+void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *boss_1, Boss_2 *boss_2, Boss_3 *boss_3)
 {
     if (!al_is_event_queue_empty(allegro->event_queue))
     {
@@ -83,13 +83,25 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1, Monster *mon
 
                 case STAGE:
                     MoveArrowInStage (allegro);
-                    EnterInStage (allegro, rockman, boss_1);
+                    EnterInStage (allegro, rockman, monster);
+                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_BACKSPACE) )
+                        allegro->STATE = MENU;
                     break;
 
                 case RULE:
                     break;
 
                 case BOSS_1:
+                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
+                        CreateBullet (rockman);
+                    break;
+
+                case BOSS_2:
+                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
+                        CreateBullet (rockman);
+                    break;
+
+                case BOSS_3:
                     if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
                         CreateBullet (rockman);
                     break;
@@ -127,7 +139,7 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1, Monster *mon
                     break;
 
                 case STAGE:
-                    DrawChooseStage (allegro, boss_1);
+                    DrawChooseStage (allegro, boss_1, boss_2, boss_3);
                     break;
 
                 case RULE:
@@ -170,6 +182,7 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1, Monster *mon
                     BulletCrushBoss_1 (boss_1, rockman);
                     RockmanCollideBoss_1 (rockman, boss_1);
                     MoveMinion (boss_1);
+                    LimitRockmanInBoss (rockman);
 
                     al_draw_bitmap (boss_1->background, 0, 0, 0);
                     DrawBullet (rockman);
@@ -183,9 +196,48 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Boss_1 *boss_1, Monster *mon
                     CheckBoss_1Alive (boss_1, allegro);
                     break;
 
+                case BOSS_2:
+                    RockmanJumpInBoss (rockman, allegro);
+                    RockmanStateInBoss (rockman, allegro);
+                    MoveRockmanInBoss (rockman, allegro);
+                    MoveBullet (rockman);
+                    CheckBulletOver (rockman);
+                    StateBoss_2 (boss_2, allegro, rockman);
+                    BulletCollideBoss_2 (rockman, boss_2);
+                    LimitRockmanInBoss (rockman);
+
+                    al_draw_bitmap (boss_2->background, 0, 0, 0);
+                    DrawBoss_2HP (boss_2);
+                    DrawBullet (rockman);
+                    DrawRockman (rockman, allegro);
+                    DrawRockmanHP (rockman);
+                    DrawBoss_2 (boss_2, allegro, rockman);
+
+                    CheckAlive (rockman, allegro);
+                    CheckBoss_2Alive (boss_2, allegro);
+                    break;
+
+                case BOSS_3:
+                    RockmanJumpInBoss (rockman, allegro);
+                    RockmanStateInBoss (rockman, allegro);
+                    MoveRockmanInBoss (rockman, allegro);
+                    MoveBullet (rockman);
+                    CheckBulletOver (rockman);
+                    LimitRockmanInBoss (rockman);
+                    MoveNormalYA (boss_3);
+
+                    al_clear_to_color (al_map_rgb(0,0,0));
+                    DrawBullet (rockman);
+                    DrawRockman (rockman, allegro);
+                    DrawRockmanHP (rockman);
+                    DrawBoss_3 (boss_3, allegro);
+                    DrawExplosion (boss_3, allegro);
+                    break;
+
                 case LOADING:
                     LoadingFinish (allegro);
                     DrawLoading (allegro);
+
                     break;
 
                 case CONTINUE:

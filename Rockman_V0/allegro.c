@@ -44,13 +44,25 @@ void AllegroDriverInit(Allegro *allegro)
     allegro->STATE = START;
     allegro->menu.state = M_CHOOSE_STAGE;
     allegro->menu.stage = CLONE;
+    allegro->time_story001 = 300;
 
     allegro->font_24 = al_load_font("./data/m5x7.ttf", 48, 0);
+    allegro->font_12 = al_load_font("./data/m5x7.ttf", 24, 0);
     InitStart (allegro);
     InitMenu (allegro);
     InitStar (NUM_STAR, allegro);
     InitMap (allegro);
     ReadMapData (allegro);
+    allegro->rule.left  = al_load_bitmap ("./picture/left_normal.png");
+    allegro->rule.right  = al_load_bitmap ("./picture/right_normal.png");
+    allegro->rule.up  = al_load_bitmap ("./picture/up_normal.png");
+    allegro->rule.space  = al_load_bitmap ("./picture/space.png");
+    allegro->rule.right_light  = al_load_bitmap ("./picture/right_light.png");
+    allegro->rule.left_light  = al_load_bitmap ("./picture/left_light.png");
+    allegro->rule.up_light  = al_load_bitmap ("./picture/up_light.png");
+    allegro->rule.space_light  = al_load_bitmap ("./picture/space_light.png");
+
+    allegro->defeat  = al_load_bitmap ("./picture/loser.png");
 }
 
 
@@ -78,7 +90,7 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
 
                 case MENU:
                     MoveArrowInMenu (allegro);
-                    EnterInMenu (allegro);
+                    EnterInMenu (allegro, rockman);
                     break;
 
                 case STAGE:
@@ -88,7 +100,16 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
                         allegro->STATE = MENU;
                     break;
 
+                case STORY:
+                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_BACKSPACE) )
+                        allegro->STATE = MENU;
+                    break;
+
                 case RULE:
+                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_BACKSPACE) )
+                        allegro->STATE = MENU;
+                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
+                        CreateBullet (rockman);
                     break;
 
                 case BOSS_1:
@@ -143,6 +164,18 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
                     break;
 
                 case RULE:
+                    al_clear_to_color (al_map_rgb(0, 0, 0));
+                    DrawRule (allegro, rockman);
+
+                    RockmanJumpInBoss (rockman, allegro);
+                    RockmanStateInBoss (rockman, allegro);
+                    MoveRockmanInBoss (rockman, allegro);
+                    MoveBullet (rockman);
+                    CheckBulletOver (rockman);
+                    LimitRockmanInBoss (rockman);
+
+                    DrawBullet (rockman);
+                    DrawRockman (rockman, allegro);
                     break;
 
                 case SMALL_STAGE:
@@ -164,7 +197,6 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
                     DrawDoorInSS (allegro);
                     DrawBullet (rockman);
                     DrawRockman (rockman, allegro);
-                    //DrawMonster (monster, allegro);
                     DrawSkull (monster, allegro);
                     DrawFireSkull (monster, allegro);
                     DrawRockmanHP (rockman);
@@ -205,6 +237,7 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
                     StateBoss_2 (boss_2, allegro, rockman);
                     BulletCollideBoss_2 (rockman, boss_2);
                     LimitRockmanInBoss (rockman);
+                    RockmanCollideBoss_2 (rockman, boss_2);
 
                     al_draw_bitmap (boss_2->background, 0, 0, 0);
                     DrawBoss_2HP (boss_2);
@@ -224,14 +257,24 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
                     MoveBullet (rockman);
                     CheckBulletOver (rockman);
                     LimitRockmanInBoss (rockman);
-                    MoveNormalYA (boss_3);
 
-                    al_clear_to_color (al_map_rgb(0,0,0));
+                    BulletCollideBoss_3 (rockman, boss_3, allegro);
+                    if (boss_3->state == 0) MoveNormalYA (boss_3);
+                    else if (boss_3->state == 1) MoveCrazyYA (boss_3, rockman);
+
+                    CheckBoss_3Bullet (boss_3, rockman);
+                    MoveBoss_3Bullet (boss_3);
+                    CheckBoss_3BulletOver (boss_3, rockman);
+
+                    if (boss_3->state == 0) al_clear_to_color (al_map_rgb(0,0,0));
+                    else if (boss_3->state == 1) al_clear_to_color (al_map_rgb(250,0,0));
+                    DrawBoss_3HP (boss_3);
                     DrawBullet (rockman);
                     DrawRockman (rockman, allegro);
                     DrawRockmanHP (rockman);
                     DrawBoss_3 (boss_3, allegro);
-                    DrawExplosion (boss_3, allegro);
+                    DrawExplosion (boss_3);
+                    DrawBoss_3Bullet (boss_3);
                     break;
 
                 case LOADING:
@@ -242,6 +285,10 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
 
                 case CONTINUE:
                     DrawGameFinish (allegro, rockman);
+                    break;
+
+                case STORY:
+                    DrawStory (allegro);
                     break;
                 }
 

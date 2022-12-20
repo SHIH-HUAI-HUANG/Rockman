@@ -31,13 +31,13 @@ void InitBoss_2 (Boss_2 *boss_2)
 // Function : track the rockman's position
 void MoveBoss_2 (Boss_2 *boss_2, Rockman *rockman)
 {
-    if ( (rockman->x - boss_2->x) > 0 )
+    if ( (rockman->x - boss_2->x - 120) > 0 )
     {
         boss_2->x = boss_2->x + boss_2->speed;
         boss_2->direction = true;
     }
 
-    else if ( (rockman->x - boss_2->x) < 0 )
+    else if ( (rockman->x - boss_2->x - 120) < 0 )
     {
         boss_2->x = boss_2->x - boss_2->speed;
         boss_2->direction = false;
@@ -234,5 +234,14 @@ void CheckAOEBoss_2 (Boss_2 *boss_2, Rockman *rockman)
 
 
 
+// rockman collide boss2, and minus rockman'HP
+void RockmanCollideBoss_2 (Rockman *rockman, Boss_2 *boss_2)
+{
+    if ( abs(rockman->x + 45 - boss_2->x - 120) < 80 && abs(rockman->y + 52 - boss_2->y - 50) < 74 )
+        {
+             rockman->HP--;
+             printf("hurt\n");
+        }
+}
 
 

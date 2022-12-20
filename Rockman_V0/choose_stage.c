@@ -35,19 +35,19 @@ void DrawArrowInStage (Allegro *allegro, Boss_1 *boss_1, Boss_2 *boss_2, Boss_3 
     switch (allegro->menu.stage)
     {
     case CLONE:
-        al_draw_bitmap(allegro->menu.icon_right, 200, 350, 0); // use menu's arrow
+        al_draw_bitmap(allegro->menu.icon_right, 100, 350, 0); // use menu's arrow
         DrawCopymanInStage (boss_1, allegro);
         al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 500, 550, 0, "Name : X");
         break;
 
     case 1:
-        al_draw_bitmap(allegro->menu.icon_right, 200, 450, 0);
+        al_draw_bitmap(allegro->menu.icon_right, 100, 450, 0);
         DrawNecromancerInStage (boss_2, allegro);
         al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 500, 550, 0, "Name : Simon");
         break;
 
     case 2:
-        al_draw_bitmap(allegro->menu.icon_right, 200, 550, 0);
+        al_draw_bitmap(allegro->menu.icon_right, 100, 550, 0);
         DrawXaiYaInStage (boss_3, allegro);
         al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 500, 550, 0, "Name : XaiYa");
         break;

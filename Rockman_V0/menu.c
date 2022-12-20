@@ -4,9 +4,10 @@ void DrawMenu (Allegro *allegro)
 {
     al_clear_to_color (al_map_rgb (0, 0, 0));
     DrawStar (NUM_STAR, allegro);
-    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 300, 350, 0, "CHOOSE STAGE");
-    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 300, 450, 0, "RULE ");
-    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 300, 550, 0, "EXIT");
+    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 384, 350, 1, "CHOOSE STAGE");
+    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 384, 450, 1, "RULE ");
+    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 384, 550, 1, "STORY");
+    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 384, 650, 1, "EXIT");
     DrawArrowInMenu (allegro);
     DrawSaturn (allegro);
 }
@@ -20,8 +21,8 @@ void MoveArrowInMenu (Allegro *allegro)
     else if ( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_DOWN) )
         allegro->menu.state++;
 
-    if (allegro->menu.state > 2)
-        allegro->menu.state = 2;
+    if (allegro->menu.state > 3)
+        allegro->menu.state = 3;
     if (allegro->menu.state < 0)
         allegro->menu.state = 0;
 }
@@ -32,15 +33,19 @@ void DrawArrowInMenu (Allegro *allegro)
     switch (allegro->menu.state)
     {
     case M_CHOOSE_STAGE:
-        al_draw_bitmap(allegro->menu.icon_right, 200, 340, 0);
+        al_draw_bitmap(allegro->menu.icon_right, 100, 340, 0);
         break;
 
     case M_RULE:
-        al_draw_bitmap(allegro->menu.icon_right, 200, 440, 0);
+        al_draw_bitmap(allegro->menu.icon_right, 100, 440, 0);
+        break;
+
+    case M_STORY:
+        al_draw_bitmap(allegro->menu.icon_right, 100, 540, 0);
         break;
 
     case M_EXIT:
-        al_draw_bitmap(allegro->menu.icon_right, 200, 540, 0);
+        al_draw_bitmap(allegro->menu.icon_right, 100, 640, 0);
         break;
 
     }
@@ -55,7 +60,7 @@ void InitMenu (Allegro *allegro)
 }
 
 
-void EnterInMenu (Allegro *allegro)
+void EnterInMenu (Allegro *allegro, Rockman *rockman)
 {
     al_get_keyboard_state(&allegro->keyboardState);
     if ( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_ENTER) )
@@ -67,7 +72,14 @@ void EnterInMenu (Allegro *allegro)
             break;
 
         case M_RULE:
+            allegro->STATE = RULE;
+            InitRockmanInRule (rockman);
+            break;
 
+        case M_STORY:
+            allegro->STATE = STORY;
+            allegro->state_story = 0;
+            allegro->time_story001 = 180;
             break;
 
         case M_EXIT:

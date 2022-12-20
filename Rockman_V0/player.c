@@ -18,7 +18,7 @@ void InitRockman (Rockman *rockman)
     rockman->speed = SPEED;
     rockman->state = STAND;
     rockman->jump_time = -1;
-    rockman->HP = 100;
+    rockman->HP = 10;
 
 
     for (int i = 0; i < NUM_BULLET; i++)
@@ -138,8 +138,6 @@ void RockmanStateInBoss (Rockman *rockman, Allegro *allegro)
 
 void RockmanJumpInBoss (Rockman *rockman, Allegro *allegro)
 {
-    printf ("jump\n");
-
     if (rockman->jump_time > JUMP_TIME/2)
     {
         rockman->y = rockman->y - 4;

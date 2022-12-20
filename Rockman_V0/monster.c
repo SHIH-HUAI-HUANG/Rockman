@@ -73,6 +73,7 @@ void InitMonster (Monster *monster)
 }
 
 
+/** no use now */
 void DrawMonster (Monster *monster, Allegro *allegro)
 {
     for (int i = 0; i < 3; i++)

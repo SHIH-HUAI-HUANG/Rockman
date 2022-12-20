@@ -29,6 +29,27 @@
 #define NUM_MONSTER 10
 
 
+typedef struct Explosion
+{
+    float x;
+    float y;
+    int times;
+
+} Explosion;
+
+typedef struct Rule
+{
+    ALLEGRO_BITMAP *right;
+    ALLEGRO_BITMAP *left;
+    ALLEGRO_BITMAP *up;
+    ALLEGRO_BITMAP *space;
+    ALLEGRO_BITMAP *right_light;
+    ALLEGRO_BITMAP *left_light;
+    ALLEGRO_BITMAP *up_light;
+    ALLEGRO_BITMAP *space_light;
+
+} Rule;
+
 typedef struct Minion
 {
     int x;
@@ -64,8 +85,10 @@ typedef struct Star
 
 typedef struct Bullet
 {
-    int x;
-    int y;
+    float x;
+    float y;
+    float speed_x;
+    float speed_y;
     bool activity;
     bool direction;
 
@@ -149,12 +172,16 @@ typedef struct Boss_3
     int speed_y;
     int state;
     int HP;
+    int HP_2;
     bool direction_x;
     bool direction_y;
     ALLEGRO_BITMAP *img_idle;
     ALLEGRO_BITMAP *img_attack;
     ALLEGRO_BITMAP *background;
     ALLEGRO_BITMAP *explosion;
+
+    Bullet bullet;
+    Explosion boom[20]; // buffer of boom
 
 } Boss_3;
 
@@ -184,6 +211,7 @@ typedef struct Allegro
 
     ALLEGRO_DISPLAY *display;
     ALLEGRO_FONT *font_24;
+    ALLEGRO_FONT *font_12;
     bool finish;
     int FRAME;
     int STATE;
@@ -195,6 +223,12 @@ typedef struct Allegro
     Star star[NUM_STAR];
     Map map;
     int matrix_map[725][6200];
+    int state_story;
+    int time_story001;
+    int time_story002;
+    int time_story003;
+    Rule rule;
+    ALLEGRO_BITMAP *defeat;
 
 } Allegro;
 
@@ -217,6 +251,7 @@ typedef enum
     START,
     MENU,
     RULE,
+    STORY,
     STAGE,
     GAME,
     SMALL_STAGE,
@@ -233,6 +268,7 @@ typedef enum
 {
     M_CHOOSE_STAGE,
     M_RULE,
+    M_STORY,
     M_EXIT
 
 } State_menu;
@@ -301,7 +337,7 @@ void MoveArrowInMenu (Allegro *allegro);
 void InitMenu (Allegro *allegro);
 void DrawArrowInMenu (Allegro *allegro);
 void DrawSaturn (Allegro *allegro);
-void EnterInMenu (Allegro *allegro);
+void EnterInMenu (Allegro *allegro, Rockman *rockman);
 
 
 /** choose stage */
@@ -366,6 +402,7 @@ void DrawBoss_2HP (Boss_2 *boss_2);
 void CheckBoss_2Alive (Boss_2 *boss_2, Allegro *allegro);
 void InitRockmanInBoss_2 (Rockman *rockman);
 void CheckAOEBoss_2 (Boss_2 *boss_2, Rockman *rockman);
+void RockmanCollideBoss_2 (Rockman *rockman, Boss_2 *boss_2);
 
 
 /** XaiYa / Boss 3 */
@@ -373,4 +410,28 @@ Boss_3 *CallocBoss_3();
 void InitBoss_3 (Boss_3 *boss_3);
 void DrawBoss_3 (Boss_3 *boss_3, Allegro *allegro);
 void MoveNormalYA (Boss_3 *boss_3);
-void DrawExplosion (Boss_3 *boss_3, Allegro *allegro);
+void DrawExplosion (Boss_3 *boss_3);
+void DrawBoss_3HP (Boss_3 *boss_3);
+
+void ComputeBulletDirection (Boss_3 *boss_3, Rockman *rockman);
+void CheckBoss_3Bullet (Boss_3 *boss_3, Rockman *rockman);
+void DrawBoss_3Bullet (Boss_3 *boss_3);
+void MoveBoss_3Bullet (Boss_3 *boss_3);
+void CheckBoss_3BulletOver (Boss_3 *boss_3, Rockman *rockman);
+
+void BulletCollideBoss_3 (Rockman *rockman, Boss_3 *boss_3, Allegro *allegro);
+void MoveCrazyYA (Boss_3 *boss_3, Rockman *rockman);
+void CreateExplosion (Boss_3 *boss_3);
+
+/** story */
+void DrawStory (Allegro *allegro);
+void DrawNotPass (Allegro *allegro);
+void DrawPass (Allegro *allegro);
+void AnimePassStory (Allegro *allegro);
+
+
+
+/** rule */
+void DrawRule (Allegro *allegro, Rockman *rockman);
+void DrawKeyboardIcon (Allegro *allegro);
+void InitRockmanInRule (Rockman *rockman);

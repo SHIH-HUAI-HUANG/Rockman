@@ -77,6 +77,7 @@ void DropInAbyss (Rockman *rockman, Allegro *allegro)
     {
         allegro->STATE = LOADING;
         allegro->frame_flag = allegro->FRAME;
+        rockman->HP = 0;
     }
 }
 
@@ -92,25 +93,29 @@ void DrawDoorInSS (Allegro* allegro)
 
 void PassSmallStage (Rockman *rockman, Allegro *allegro)
 {
+    al_get_keyboard_state(&allegro->keyboardState);
     int x = rockman->x + ROCKMAN_W/2;
     int y = rockman->y + ROCKMAN_H/2;
     if ( abs(x - (allegro->map.x + 6110)) < (45 + ROCKMAN_W/2) && abs(y - 110) < (75 + ROCKMAN_H/2) )
     {
-        switch(allegro->boss_stage)
+        if (al_key_down(&allegro->keyboardState, ALLEGRO_KEY_UP))
         {
-        case CLONE:
-            allegro->STATE = BOSS_1;
-            InitRockmanInBoss_1 (rockman);
-            break;
+            switch(allegro->boss_stage)
+            {
+            case CLONE:
+                allegro->STATE = BOSS_1;
+                InitRockmanInBoss_1 (rockman);
+                break;
 
             case NECROMANCER:
-            allegro->STATE = BOSS_2;
-            InitRockmanInBoss_2 (rockman);
-            break;
+                allegro->STATE = BOSS_2;
+                InitRockmanInBoss_2 (rockman);
+                break;
 
             case XAIYA:
-            allegro->STATE = BOSS_3;
-            break;
+                allegro->STATE = BOSS_3;
+                break;
+            }
         }
     }
 }

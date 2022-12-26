@@ -225,9 +225,33 @@ void CheckBoss_1Alive (Boss_1 *boss_1, Allegro *allegro)
     {
         allegro->STATE = LOADING;
         allegro->frame_flag = allegro->FRAME;
+        allegro->pass_stage1 = true;
     }
 }
 
+/** total function */
+void StageBoss_1 (Boss_1 *boss_1, Rockman *rockman, Allegro *allegro)
+{
+    RockmanJumpInBoss (rockman, allegro);
+    RockmanStateInBoss (rockman, allegro);
+    MoveRockmanInBoss (rockman, allegro);
+    MoveBullet (rockman);
+    MoveBoss_1 (boss_1);
+    CheckBulletOver (rockman);
+    BulletCrushBoss_1 (boss_1, rockman);
+    RockmanCollideBoss_1 (rockman, boss_1);
+    MoveMinion (boss_1);
+    LimitRockmanInBoss (rockman);
 
+    al_draw_bitmap (boss_1->background, 0, 0, 0);
+    DrawBullet (rockman);
+    DrawRockman (rockman, allegro);
+    DrawBoss_1 (boss_1, allegro);
+    DrawRockmanHP (rockman);
+    DrawMinion (boss_1, allegro);
+    DrawBoss_1HP (boss_1);
 
+    CheckAlive (rockman, allegro);
+    CheckBoss_1Alive (boss_1, allegro);
+}
 

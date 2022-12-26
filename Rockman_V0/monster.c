@@ -223,12 +223,18 @@ void MonsterCrushRockman (Monster *monster, Rockman *rockman, Allegro *allegro)
 
     for (int i = 0; i < 5; i++)
     {
-        if ( abs(x - monster[i].x - 54 - allegro->map.x) < (44 + ROCKMAN_W/2) && abs(y - monster[i].y - 35 - allegro->map.y) < (25 + ROCKMAN_H/2) && monster[i].alive)
+        if ( abs(x - monster[i].x - 54 - allegro->map.x) < (15 + 15) && abs(y - monster[i].y - 35 - allegro->map.y) < (23 + 38) && monster[i].alive)
+        {
             rockman->HP--;
+            monster[i].alive = false;
+        }
     }
     for (int i = 5; i < 10; i++)
     {
-        if ( abs(x - monster[i].x - 96 - allegro->map.x) < (86 + ROCKMAN_W/2) && abs(y - monster[i].y - 56 - allegro->map.y) < (46 + ROCKMAN_H/2) && monster[i].alive)
+        if ( abs(x - monster[i].x - 96 - allegro->map.x) < (15 + 15) && abs(y - monster[i].y - 56 - allegro->map.y) < (23 + 38) && monster[i].alive)
+        {
             rockman->HP--;
+            monster[i].alive = false;
+        }
     }
 }

@@ -19,6 +19,7 @@ void InitRockman (Rockman *rockman)
     rockman->state = STAND;
     rockman->jump_time = -1;
     rockman->HP = 10;
+    rockman->record_HP = 10;
 
 
     for (int i = 0; i < NUM_BULLET; i++)
@@ -36,6 +37,7 @@ void DrawRockman (Rockman *rockman, Allegro *allegro)
 {
     int range = allegro->FRAME%32;
     int range_stand = allegro->FRAME%120;
+    int range_hurt = allegro->FRAME%40;
 
     switch (rockman->state)
     {
@@ -81,6 +83,14 @@ void DrawRockman (Rockman *rockman, Allegro *allegro)
 
     case ATTACK:
         al_draw_bitmap_region (rockman->img, 467, 118, 109, 105, rockman->x, rockman->y, rockman->direction);
+        break;
+
+    case HURT:
+        if ( 0 <= range_hurt && range_hurt < 20)
+            al_draw_bitmap_region (rockman->img, 118, 352, 100, 105, rockman->x, rockman->y, rockman->direction);
+
+        else if ( 20 <= range_hurt && range_hurt < 40)
+            al_draw_bitmap_region (rockman->img, 233, 352, 100, 105, rockman->x, rockman->y, rockman->direction);
         break;
     }
 }
@@ -187,4 +197,22 @@ void LimitRockmanInBoss (Rockman *rockman)
     if (rockman->x > 678)
         rockman->x = 678;
 }
+
+
+// Function : rockman suffer damage, he change his action.
+void RockmanSufferDamage (Rockman *rockman)
+{
+    if (rockman->HP < rockman->record_HP)
+    {
+        rockman->record_HP = rockman->HP;
+        rockman->time_hurt = 60; // time for damage
+    }
+
+    if (rockman->time_hurt > 0)
+    {
+        rockman->time_hurt--;
+        rockman->state = HURT;
+    }
+}
+
 

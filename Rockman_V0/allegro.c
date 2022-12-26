@@ -179,75 +179,15 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
                     break;
 
                 case SMALL_STAGE:
-                    rockman->state = STAND;
-                    Gravity (allegro, rockman);
-                    DropInAbyss (rockman, allegro);
-
-                    MoveMap (allegro, rockman);
-                    RockmanStateInSS (rockman, allegro);
-                    MoveRockmanInSS (rockman, allegro);
-                    MoveBullet (rockman);
-                    CheckBulletOver (rockman);
-                    MoveSkull (monster);
-                    MoveFireSkull (monster);
-                    BulletCrushMonster (monster, rockman, allegro);
-                    MonsterCrushRockman (monster, rockman, allegro);
-
-                    al_draw_bitmap (allegro->map.img, allegro->map.x, allegro->map.y, 0);
-                    DrawDoorInSS (allegro);
-                    DrawBullet (rockman);
-                    DrawRockman (rockman, allegro);
-                    DrawSkull (monster, allegro);
-                    DrawFireSkull (monster, allegro);
-                    DrawRockmanHP (rockman);
-                    PassSmallStage (rockman, allegro);
-                    CheckAlive (rockman, allegro);
+                    StageSmall (rockman, allegro, boss_1, boss_2, boss_3, monster);
                     break;
 
                 case BOSS_1:
-                    RockmanJumpInBoss (rockman, allegro);
-                    RockmanStateInBoss (rockman, allegro);
-                    MoveRockmanInBoss (rockman, allegro);
-                    MoveBullet (rockman);
-                    MoveBoss_1 (boss_1);
-                    CheckBulletOver (rockman);
-                    BulletCrushBoss_1 (boss_1, rockman);
-                    RockmanCollideBoss_1 (rockman, boss_1);
-                    MoveMinion (boss_1);
-                    LimitRockmanInBoss (rockman);
-
-                    al_draw_bitmap (boss_1->background, 0, 0, 0);
-                    DrawBullet (rockman);
-                    DrawRockman (rockman, allegro);
-                    DrawBoss_1 (boss_1, allegro);
-                    DrawRockmanHP (rockman);
-                    DrawMinion (boss_1, allegro);
-                    DrawBoss_1HP (boss_1);
-
-                    CheckAlive (rockman, allegro);
-                    CheckBoss_1Alive (boss_1, allegro);
+                    StageBoss_1 (boss_1, rockman, allegro);
                     break;
 
                 case BOSS_2:
-                    RockmanJumpInBoss (rockman, allegro);
-                    RockmanStateInBoss (rockman, allegro);
-                    MoveRockmanInBoss (rockman, allegro);
-                    MoveBullet (rockman);
-                    CheckBulletOver (rockman);
-                    StateBoss_2 (boss_2, allegro, rockman);
-                    BulletCollideBoss_2 (rockman, boss_2);
-                    LimitRockmanInBoss (rockman);
-                    RockmanCollideBoss_2 (rockman, boss_2);
-
-                    al_draw_bitmap (boss_2->background, 0, 0, 0);
-                    DrawBoss_2HP (boss_2);
-                    DrawBullet (rockman);
-                    DrawRockman (rockman, allegro);
-                    DrawRockmanHP (rockman);
-                    DrawBoss_2 (boss_2, allegro, rockman);
-
-                    CheckAlive (rockman, allegro);
-                    CheckBoss_2Alive (boss_2, allegro);
+                    StageBoss_2 (boss_2, rockman, allegro);
                     break;
 
                 case BOSS_3:
@@ -257,6 +197,7 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
                     MoveBullet (rockman);
                     CheckBulletOver (rockman);
                     LimitRockmanInBoss (rockman);
+                    RockmanCollideBoss_3 (rockman, boss_3);
 
                     BulletCollideBoss_3 (rockman, boss_3, allegro);
                     if (boss_3->state == 0) MoveNormalYA (boss_3);

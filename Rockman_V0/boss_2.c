@@ -12,7 +12,7 @@ Boss_2 *CallocBoss_2()
 
 void InitBoss_2 (Boss_2 *boss_2)
 {
-    boss_2->x = 500;
+    boss_2->x = 600;
     boss_2->y = 495;
     boss_2->speed = 1;
     boss_2->HP = 10;
@@ -197,6 +197,7 @@ void CheckBoss_2Alive (Boss_2 *boss_2, Allegro *allegro)
     {
         allegro->STATE = LOADING;
         allegro->frame_flag = allegro->FRAME;
+        allegro->pass_stage2 = true;
     }
 }
 
@@ -238,10 +239,32 @@ void CheckAOEBoss_2 (Boss_2 *boss_2, Rockman *rockman)
 void RockmanCollideBoss_2 (Rockman *rockman, Boss_2 *boss_2)
 {
     if ( abs(rockman->x + 45 - boss_2->x - 120) < 80 && abs(rockman->y + 52 - boss_2->y - 50) < 74 )
-        {
-             rockman->HP--;
-             printf("hurt\n");
-        }
+    {
+        rockman->HP--;
+    }
 }
 
 
+
+void StageBoss_2 (Boss_2 *boss_2, Rockman *rockman, Allegro *allegro)
+{
+    RockmanJumpInBoss (rockman, allegro);
+    RockmanStateInBoss (rockman, allegro);
+    MoveRockmanInBoss (rockman, allegro);
+    MoveBullet (rockman);
+    CheckBulletOver (rockman);
+    StateBoss_2 (boss_2, allegro, rockman);
+    BulletCollideBoss_2 (rockman, boss_2);
+    LimitRockmanInBoss (rockman);
+    RockmanCollideBoss_2 (rockman, boss_2);
+
+    al_draw_bitmap (boss_2->background, 0, 0, 0);
+    DrawBoss_2HP (boss_2);
+    DrawBullet (rockman);
+    DrawRockman (rockman, allegro);
+    DrawRockmanHP (rockman);
+    DrawBoss_2 (boss_2, allegro, rockman);
+
+    CheckAlive (rockman, allegro);
+    CheckBoss_2Alive (boss_2, allegro);
+}

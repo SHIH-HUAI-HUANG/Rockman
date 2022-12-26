@@ -80,7 +80,7 @@ void EnterInStage (Allegro *allegro, Rockman *rockman, Monster *monster)
             break;
 
         case 2:
-            allegro->STATE = BOSS_3;
+            allegro->STATE = SMALL_STAGE;
             allegro->boss_stage = XAIYA;
             InitRockman(rockman);
             InitMonster (monster);

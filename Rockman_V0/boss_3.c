@@ -20,6 +20,7 @@ void InitBoss_3 (Boss_3 *boss_3)
     boss_3->HP_2 = 1;
     boss_3->state = 0;
     boss_3->bullet.activity = false;
+    boss_3->time_crazy_attack = 180;
 
     boss_3->direction_x = true;
     boss_3->direction_y = true;
@@ -254,6 +255,7 @@ void BulletCollideBoss_3 (Rockman *rockman, Boss_3 *boss_3, Allegro *allegro)
     {
         allegro->STATE = LOADING;
         allegro->frame_flag = allegro->FRAME;
+        allegro->pass_stage3 = true;
     }
 }
 
@@ -276,6 +278,42 @@ void DrawBoss_3HP (Boss_3 *boss_3)
         }
     }
 }
+
+
+
+// rockman collide boss2, and minus rockman'HP
+void RockmanCollideBoss_3 (Rockman *rockman, Boss_3 *boss_3)
+{
+    if ( abs(rockman->x + 45 - boss_3->x - 75) < 56 && abs(rockman->y + 52 - boss_3->y - 100) < 109 && boss_3->state == 0 )
+    {
+        rockman->HP--;
+    }
+
+    else if ( abs(rockman->x + 45 - boss_3->x - 75) < 56 && abs(rockman->y + 52 - boss_3->y - 100) < 109 && boss_3->state == 1 )
+    {
+        if (boss_3->time_crazy_attack == 180)
+        {
+            rockman->HP--;
+            boss_3->time_crazy_attack--;
+        }
+    }
+
+    if (boss_3->time_crazy_attack < 180) boss_3->time_crazy_attack--;
+    else if (boss_3->time_crazy_attack < 0) boss_3->time_crazy_attack = 180;
+}
+
+
+
+void InitRockmanInBoss_3 (Rockman *rockman)
+{
+    rockman->x = 0;
+    rockman->y = 400;
+    for (int i = 0; i < NUM_BULLET; i++)
+    {
+        rockman->bullet[i].activity = false;
+    }
+}
+
 
 
 

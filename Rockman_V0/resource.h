@@ -119,6 +119,8 @@ typedef struct Rockman
     int jump_time;
     int attack_time;
     int HP;
+    int record_HP;
+    int time_hurt;
 
     bool direction;
     ALLEGRO_BITMAP *img;
@@ -175,6 +177,7 @@ typedef struct Boss_3
     int HP_2;
     bool direction_x;
     bool direction_y;
+    int time_crazy_attack;
     ALLEGRO_BITMAP *img_idle;
     ALLEGRO_BITMAP *img_attack;
     ALLEGRO_BITMAP *background;
@@ -227,6 +230,9 @@ typedef struct Allegro
     int time_story001;
     int time_story002;
     int time_story003;
+    bool pass_stage1;
+    bool pass_stage2;
+    bool pass_stage3;
     Rule rule;
     ALLEGRO_BITMAP *defeat;
 
@@ -240,7 +246,8 @@ typedef enum
     RUN_RIGHT,
     RUN_LEFT,
     JUMP,
-    ATTACK
+    ATTACK,
+    HURT
 
 } State_rockman;
 
@@ -298,7 +305,7 @@ void RockmanJumpInBoss (Rockman *rockman, Allegro *allegro);
 void DrawRockmanHP (Rockman *rockman);
 void CheckAlive (Rockman *rockman, Allegro *allegro);
 void LimitRockmanInBoss (Rockman *rockman);
-
+void RockmanSufferDamage (Rockman *rockman);
 
 void CreateBullet (Rockman *rockman);
 void DrawBullet (Rockman *rockman);
@@ -319,7 +326,7 @@ void MoveMinion (Boss_1 *boss_1);
 void DrawBoss_1HP (Boss_1 *boss_1);
 void CheckBoss_1Alive (Boss_1 *boss_1, Allegro *allegro);
 void RockmanCollideMinion (Rockman *rockman, Boss_1 *boss_1);
-
+void StageBoss_1 (Boss_1 *boss_1, Rockman *rockman, Allegro *allegro);
 
 /** Start */
 void DrawRockmanInStart (Rockman *rockman, Allegro *allegro);
@@ -363,7 +370,8 @@ void MoveRockmanInSS(Rockman *rockman, Allegro *allegro);
 void RockmanStateInSS (Rockman *rockman, Allegro *allegro);
 void DropInAbyss (Rockman *rockman, Allegro *allegro);
 void DrawDoorInSS (Allegro* allegro);
-void PassSmallStage (Rockman *rockman, Allegro *allegro);
+void PassSmallStage (Rockman *rockman, Allegro *allegro, Boss_1 *boss_1, Boss_2 *boss_2, Boss_3 *boss_3);
+void StageSmall (Rockman *rockman, Allegro *allegro, Boss_1 *boss_1, Boss_2 *boss_2, Boss_3 *boss_3, Monster *monster);
 
 
 /** Loading */
@@ -403,6 +411,7 @@ void CheckBoss_2Alive (Boss_2 *boss_2, Allegro *allegro);
 void InitRockmanInBoss_2 (Rockman *rockman);
 void CheckAOEBoss_2 (Boss_2 *boss_2, Rockman *rockman);
 void RockmanCollideBoss_2 (Rockman *rockman, Boss_2 *boss_2);
+void StageBoss_2 (Boss_2 *boss_2, Rockman *rockman, Allegro *allegro);
 
 
 /** XaiYa / Boss 3 */
@@ -418,10 +427,12 @@ void CheckBoss_3Bullet (Boss_3 *boss_3, Rockman *rockman);
 void DrawBoss_3Bullet (Boss_3 *boss_3);
 void MoveBoss_3Bullet (Boss_3 *boss_3);
 void CheckBoss_3BulletOver (Boss_3 *boss_3, Rockman *rockman);
+void RockmanCollideBoss_3 (Rockman *rockman, Boss_3 *boss_3);
 
 void BulletCollideBoss_3 (Rockman *rockman, Boss_3 *boss_3, Allegro *allegro);
 void MoveCrazyYA (Boss_3 *boss_3, Rockman *rockman);
 void CreateExplosion (Boss_3 *boss_3);
+void InitRockmanInBoss_3 (Rockman *rockman);
 
 /** story */
 void DrawStory (Allegro *allegro);

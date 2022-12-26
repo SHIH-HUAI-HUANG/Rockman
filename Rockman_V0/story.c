@@ -4,10 +4,17 @@
 void DrawStory (Allegro *allegro)
 {
     al_clear_to_color (al_map_rgb (0, 0, 0));
-    //DrawNotPass (allegro);
-    AnimePassStory (allegro);
-    DrawPass (allegro);
     al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 650, 50, 0, "Back");
+
+    if (allegro->pass_stage1 && allegro->pass_stage2 && allegro->pass_stage3)
+    {
+        AnimePassStory (allegro);
+        DrawPass (allegro);
+    }
+    else
+    {
+        DrawNotPass (allegro);
+    }
 }
 
 

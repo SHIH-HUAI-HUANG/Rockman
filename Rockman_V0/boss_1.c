@@ -226,6 +226,7 @@ void CheckBoss_1Alive (Boss_1 *boss_1, Allegro *allegro)
         allegro->STATE = LOADING;
         allegro->frame_flag = allegro->FRAME;
         allegro->pass_stage1 = true;
+        al_set_sample_instance_playing(allegro->instance2, false); // close game music
     }
 }
 
@@ -242,6 +243,7 @@ void StageBoss_1 (Boss_1 *boss_1, Rockman *rockman, Allegro *allegro)
     RockmanCollideBoss_1 (rockman, boss_1);
     MoveMinion (boss_1);
     LimitRockmanInBoss (rockman);
+    RockmanHurtInBoss (rockman);
 
     al_draw_bitmap (boss_1->background, 0, 0, 0);
     DrawBullet (rockman);

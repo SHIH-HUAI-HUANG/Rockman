@@ -88,7 +88,7 @@ void DrawDoorInSS (Allegro* allegro)
     if ( 0 <= range && range < 30)
         al_draw_filled_rectangle (allegro->map.x + 6110, 35, allegro->map.x + 6200, 185, al_map_rgb(255, 255, 255));
 
-     al_draw_textf(allegro->font_24, al_map_rgb(0, 0, 0), allegro->map.x + 6155, 80, 1, "UP !!");
+    al_draw_textf(allegro->font_24, al_map_rgb(0, 0, 0), allegro->map.x + 6155, 80, 1, "UP !!");
 }
 
 
@@ -108,18 +108,24 @@ void PassSmallStage (Rockman *rockman, Allegro *allegro, Boss_1 *boss_1, Boss_2 
                 allegro->STATE = BOSS_1;
                 InitRockmanInBoss_1 (rockman);
                 InitBoss_1 (boss_1);
+                al_set_sample_instance_playing(allegro->instance1, false); // close game music
+                al_set_sample_instance_playing(allegro->instance2, true); // open game music
                 break;
 
             case NECROMANCER:
                 allegro->STATE = BOSS_2;
                 InitRockmanInBoss_2 (rockman);
                 InitBoss_2 (boss_2);
+                al_set_sample_instance_playing(allegro->instance1, false); // close game music
+                al_set_sample_instance_playing(allegro->instance3, true); // open game music
                 break;
 
             case XAIYA:
                 allegro->STATE = BOSS_3;
                 InitRockmanInBoss_3 (rockman);
                 InitBoss_3 (boss_3);
+                al_set_sample_instance_playing(allegro->instance1, false); // close game music
+                al_set_sample_instance_playing(allegro->instance4, true); // open game music
                 break;
             }
         }

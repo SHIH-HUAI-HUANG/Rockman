@@ -21,7 +21,9 @@ void DrawStory (Allegro *allegro)
 
 void DrawNotPass (Allegro *allegro)
 {
-    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 384, 400, 1, "THE FORCES OF EVIL ARE STILL SPREADING !!");
+    DrawJohnWu (allegro);
+    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 384, 450, 1, "JOHN WU IS DOMINATING THE NUK EE.");
+    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 384, 500, 1, "THE FORCES OF EVIL ARE STILL SPREADING !!");
 }
 
 
@@ -82,4 +84,29 @@ void AnimePassStory (Allegro *allegro)
         }
         break;
     }
+}
+
+
+
+void DrawJohnWu (Allegro *allegro)
+{
+    int range = allegro->FRAME%240;
+
+    if (0 <= range && range < 10)
+        al_draw_bitmap (allegro->johnwu002, 100, 0, 0);
+
+    else if (10 <= range && range < 20)
+        al_draw_bitmap (allegro->johnwu001, 100, 0, 0);
+
+    else if (20 <= range && range < 25)
+        al_draw_bitmap (allegro->johnwu002, 100, 0, 0);
+
+    else if (25 <= range && range < 40)
+        al_draw_bitmap (allegro->johnwu001, 100, 0, 0);
+
+    else if (40 <= range && range < 180)
+        al_draw_bitmap (allegro->johnwu002, 100, 0, 0);
+
+    else if (180 <= range && range < 240)
+        al_draw_bitmap (allegro->johnwu001, 100, 0, 0);
 }

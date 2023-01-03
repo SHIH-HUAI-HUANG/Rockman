@@ -198,6 +198,7 @@ void CheckBoss_2Alive (Boss_2 *boss_2, Allegro *allegro)
         allegro->STATE = LOADING;
         allegro->frame_flag = allegro->FRAME;
         allegro->pass_stage2 = true;
+         al_set_sample_instance_playing(allegro->instance3, false); // close game music
     }
 }
 
@@ -257,6 +258,7 @@ void StageBoss_2 (Boss_2 *boss_2, Rockman *rockman, Allegro *allegro)
     BulletCollideBoss_2 (rockman, boss_2);
     LimitRockmanInBoss (rockman);
     RockmanCollideBoss_2 (rockman, boss_2);
+    RockmanHurtInBoss (rockman);
 
     al_draw_bitmap (boss_2->background, 0, 0, 0);
     DrawBoss_2HP (boss_2);

@@ -59,7 +59,6 @@ void ReadMapData (Allegro *allegro)
             col++;
         }
         row++;
-        printf("row = %d\n", row);
     }
 
     fclose (csv);

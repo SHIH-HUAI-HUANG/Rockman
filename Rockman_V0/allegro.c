@@ -23,7 +23,7 @@ void AllegroDriverInit(Allegro *allegro)
     al_init_ttf_addon();  // TureType Font addon also support .ttc
     al_init_native_dialog_addon();
     al_init_primitives_addon();
-    //al_reserve_samples(2);
+    al_reserve_samples(9);
     srand( time(NULL) );
 
     allegro->display = al_create_display(WINDOWS_W, WINDOWS_H);
@@ -46,6 +46,7 @@ void AllegroDriverInit(Allegro *allegro)
     allegro->menu.stage = CLONE;
     allegro->time_story001 = 300;
 
+    allegro->font_96 = al_load_font("./data/m5x7.ttf", 60, 0);
     allegro->font_24 = al_load_font("./data/m5x7.ttf", 48, 0);
     allegro->font_12 = al_load_font("./data/m5x7.ttf", 24, 0);
     InitStart (allegro);
@@ -61,8 +62,54 @@ void AllegroDriverInit(Allegro *allegro)
     allegro->rule.left_light  = al_load_bitmap ("./picture/left_light.png");
     allegro->rule.up_light  = al_load_bitmap ("./picture/up_light.png");
     allegro->rule.space_light  = al_load_bitmap ("./picture/space_light.png");
-
     allegro->defeat  = al_load_bitmap ("./picture/loser.png");
+    allegro->victory  = al_load_bitmap ("./picture/win.png");
+    allegro->johnwu001 = al_load_bitmap ("./picture/johnwu001.png");
+    allegro->johnwu002 = al_load_bitmap ("./picture/johnwu002.png");
+
+    allegro->sample_stage = al_load_sample("./data/music/Elec-Man-Stage.wav");
+    allegro->instance1 = al_create_sample_instance (allegro->sample_stage);
+    voice_init( allegro->instance1, &(allegro->mixer1), &(allegro->voice1));
+    al_set_sample_instance_gain(allegro->instance1, 1);
+    al_set_sample_instance_playmode(allegro->instance1, ALLEGRO_PLAYMODE_LOOP);
+    allegro->sample_boss1 = al_load_sample("./data/music/WilyFortres 1.wav");
+    allegro->instance2 = al_create_sample_instance (allegro->sample_boss1);
+    voice_init( allegro->instance2, &(allegro->mixer2), &(allegro->voice2));
+    al_set_sample_instance_gain(allegro->instance2, 1);
+    al_set_sample_instance_playmode(allegro->instance2, ALLEGRO_PLAYMODE_LOOP);
+    allegro->sample_boss2 = al_load_sample("./data/music/WilyFortres 2.wav");
+    allegro->instance3 = al_create_sample_instance (allegro->sample_boss2);
+    voice_init( allegro->instance3, &(allegro->mixer3), &(allegro->voice3));
+    al_set_sample_instance_gain(allegro->instance3, 1);
+    al_set_sample_instance_playmode(allegro->instance3, ALLEGRO_PLAYMODE_LOOP);
+    allegro->sample_boss3 = al_load_sample("./data/music/WilyFortres 3.wav");
+    allegro->instance4 = al_create_sample_instance (allegro->sample_boss3);
+    voice_init( allegro->instance4, &(allegro->mixer4), &(allegro->voice4));
+    al_set_sample_instance_gain(allegro->instance4, 1);
+    al_set_sample_instance_playmode(allegro->instance4, ALLEGRO_PLAYMODE_LOOP);
+    allegro->sample_win = al_load_sample("./data/music/victory.wav");
+    allegro->instance5 = al_create_sample_instance (allegro->sample_win);
+    voice_init( allegro->instance5, &(allegro->mixer5), &(allegro->voice5));
+    al_set_sample_instance_gain(allegro->instance5, 1);
+    al_set_sample_instance_playmode(allegro->instance5, ALLEGRO_PLAYMODE_ONCE);
+    allegro->sample_button = al_load_sample("./data/music/button.wav");
+    allegro->instance6 = al_create_sample_instance (allegro->sample_button);
+    voice_init( allegro->instance6, &(allegro->mixer6), &(allegro->voice6));
+    al_set_sample_instance_gain(allegro->instance6, 1);
+    al_set_sample_instance_playmode(allegro->instance6, ALLEGRO_PLAYMODE_ONCE);
+    allegro->sample_beep = al_load_sample("./data/music/beep.wav");
+    allegro->instance7 = al_create_sample_instance (allegro->sample_beep);
+    voice_init( allegro->instance7, &(allegro->mixer7), &(allegro->voice7));
+    al_set_sample_instance_gain(allegro->instance7, 1);
+    al_set_sample_instance_playmode(allegro->instance7, ALLEGRO_PLAYMODE_LOOP);
+    allegro->sample_taiwan = al_load_sample("./data/music/Taiwan.wav");
+    allegro->instance8 = al_create_sample_instance (allegro->sample_taiwan);
+    voice_init( allegro->instance8, &(allegro->mixer8), &(allegro->voice8));
+    al_set_sample_instance_gain(allegro->instance8, 1);
+    al_set_sample_instance_playmode(allegro->instance8, ALLEGRO_PLAYMODE_LOOP);
+
+    al_set_sample_instance_playing(allegro->instance7, true);  //music for start
+    ReadScoreCSV (allegro);
 }
 
 
@@ -85,7 +132,12 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
                 {
                 case START:
                     if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_ENTER) )
+                    {
                         allegro->STATE = MENU;
+                        al_set_sample_instance_playing(allegro->instance7, false); // turn off beep song
+                        al_set_sample_instance_playing(allegro->instance8, true);  // turn on taiwan song
+                        al_set_sample_instance_playing(allegro->instance6, true);
+                    }
                     break;
 
                 case MENU:
@@ -97,17 +149,41 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
                     MoveArrowInStage (allegro);
                     EnterInStage (allegro, rockman, monster);
                     if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_BACKSPACE) )
+                    {
                         allegro->STATE = MENU;
+                        al_set_sample_instance_playing(allegro->instance6, true);
+                    }
                     break;
 
                 case STORY:
                     if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_BACKSPACE) )
+                    {
                         allegro->STATE = MENU;
+                        al_set_sample_instance_playing(allegro->instance6, true);
+                    }
+                    break;
+
+                case SCOREBOARD:
+                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_BACKSPACE) )
+                    {
+                        allegro->STATE = MENU;
+                        al_set_sample_instance_playing(allegro->instance6, true);
+                    }
+                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_ENTER) /*&& allegro->pass_stage1 && allegro->pass_stage2 && allegro->pass_stage3*/ )
+                        allegro->STATE = TYPE;
+                    break;
+
+                case TYPE:
+                    CheckKeyboardDown (allegro);
                     break;
 
                 case RULE:
                     if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_BACKSPACE) )
+                    {
                         allegro->STATE = MENU;
+                        al_set_sample_instance_playing(allegro->instance6, true);
+                    }
+
                     if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
                         CreateBullet (rockman);
                     break;
@@ -131,7 +207,6 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
                     if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
                         CreateBullet (rockman);
                     break;
-
                 }
                 break;
 
@@ -148,6 +223,7 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
 
             case ALLEGRO_EVENT_TIMER: /** timer */
                 allegro->FRAME++; // count the frame
+                printf("jump = %d\n", rockman->jump_time);
 
                 switch (allegro->STATE)
                 {
@@ -198,6 +274,8 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
                     CheckBulletOver (rockman);
                     LimitRockmanInBoss (rockman);
                     RockmanCollideBoss_3 (rockman, boss_3);
+                    CheckAlive (rockman, allegro);
+                    RockmanHurtInBoss (rockman);
 
                     BulletCollideBoss_3 (rockman, boss_3, allegro);
                     if (boss_3->state == 0) MoveNormalYA (boss_3);
@@ -207,8 +285,8 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
                     MoveBoss_3Bullet (boss_3);
                     CheckBoss_3BulletOver (boss_3, rockman);
 
-                    if (boss_3->state == 0) al_clear_to_color (al_map_rgb(0,0,0));
-                    else if (boss_3->state == 1) al_clear_to_color (al_map_rgb(250,0,0));
+                    if (boss_3->state == 0)  al_draw_bitmap (boss_3->background1, 0, 0, 0);
+                    else if (boss_3->state == 1)  al_draw_bitmap (boss_3->background2, 0, 0, 0);
                     DrawBoss_3HP (boss_3);
                     DrawBullet (rockman);
                     DrawRockman (rockman, allegro);
@@ -219,7 +297,7 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
                     break;
 
                 case LOADING:
-                    LoadingFinish (allegro);
+                    LoadingFinish (allegro, rockman);
                     DrawLoading (allegro);
 
                     break;
@@ -230,6 +308,14 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
 
                 case STORY:
                     DrawStory (allegro);
+                    break;
+
+                case SCOREBOARD:
+                    DrawScoreBoard (allegro);
+                    break;
+
+                    case TYPE:
+                    DrawTypeName (allegro);
                     break;
                 }
 
@@ -242,3 +328,10 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
 
 
 
+void voice_init(ALLEGRO_SAMPLE_INSTANCE *instance, ALLEGRO_MIXER **mixer, ALLEGRO_VOICE **voice)
+{
+    *mixer = al_create_mixer(al_get_sample_instance_frequency(instance), al_get_sample_instance_depth(instance), al_get_sample_instance_channels(instance));
+    *voice = al_create_voice(al_get_sample_instance_frequency(instance), al_get_sample_instance_depth(instance), al_get_sample_instance_channels(instance));
+    al_attach_sample_instance_to_mixer(instance, *mixer);
+    al_attach_mixer_to_voice(*mixer, *voice);
+}

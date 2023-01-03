@@ -2,6 +2,7 @@
 
 int main()
 {
+    srand (time(NULL));
     Allegro *allegro = CallocAllegro();
     AllegroDriverInit (allegro);
     Rockman *rockman = CallocRockman ();

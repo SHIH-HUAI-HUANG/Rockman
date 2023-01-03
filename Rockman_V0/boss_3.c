@@ -27,6 +27,8 @@ void InitBoss_3 (Boss_3 *boss_3)
     boss_3->img_idle = al_load_bitmap ("./picture/XaiYa.png");
     boss_3->img_attack = al_load_bitmap ("./picture/XaiYa_crazy.png");
     boss_3->explosion = al_load_bitmap ("./picture/123.png");
+    boss_3->background1 = al_load_bitmap ("./picture/night.png");
+    boss_3->background2 = al_load_bitmap ("./picture/night_crazy.png");
 }
 
 
@@ -256,6 +258,7 @@ void BulletCollideBoss_3 (Rockman *rockman, Boss_3 *boss_3, Allegro *allegro)
         allegro->STATE = LOADING;
         allegro->frame_flag = allegro->FRAME;
         allegro->pass_stage3 = true;
+        al_set_sample_instance_playing(allegro->instance4, false); // close game music
     }
 }
 

@@ -74,6 +74,9 @@
 		<Unit filename="rule.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="scoreboard.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="small_stage.c">
 			<Option compilerVar="CC" />
 		</Unit>

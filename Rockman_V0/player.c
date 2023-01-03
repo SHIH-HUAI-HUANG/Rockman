@@ -185,6 +185,10 @@ void CheckAlive (Rockman *rockman, Allegro *allegro)
     {
         allegro->STATE = LOADING;
         allegro->frame_flag = allegro->FRAME;
+        al_set_sample_instance_playing(allegro->instance1, false); // close game music
+        al_set_sample_instance_playing(allegro->instance2, false); // close game music
+        al_set_sample_instance_playing(allegro->instance3, false); // close game music
+        al_set_sample_instance_playing(allegro->instance4, false); // close game music
     }
 }
 
@@ -202,7 +206,7 @@ void LimitRockmanInBoss (Rockman *rockman)
 // Function : rockman suffer damage, he change his action.
 void RockmanSufferDamage (Rockman *rockman)
 {
-    if (rockman->HP < rockman->record_HP)
+    if (rockman->HP < rockman->record_HP && rockman->time_hurt <= 0)
     {
         rockman->record_HP = rockman->HP;
         rockman->time_hurt = 60; // time for damage
@@ -215,4 +219,20 @@ void RockmanSufferDamage (Rockman *rockman)
     }
 }
 
+
+
+void RockmanHurtInBoss (Rockman *rockman)
+{
+    if (rockman->HP < rockman->record_HP && rockman->time_hurt <= 0)
+    {
+        rockman->record_HP = rockman->HP;
+        rockman->time_hurt = 60; // time for damage
+    }
+
+    if (rockman->time_hurt > 0)
+    {
+        rockman->time_hurt--;
+        rockman->HP = rockman->record_HP;
+    }
+}
 

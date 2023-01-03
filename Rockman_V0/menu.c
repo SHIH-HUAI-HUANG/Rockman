@@ -4,10 +4,11 @@ void DrawMenu (Allegro *allegro)
 {
     al_clear_to_color (al_map_rgb (0, 0, 0));
     DrawStar (NUM_STAR, allegro);
-    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 384, 350, 1, "CHOOSE STAGE");
-    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 384, 450, 1, "RULE ");
-    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 384, 550, 1, "STORY");
-    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 384, 650, 1, "EXIT");
+    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 384, 350, 1, "STAGE");
+    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 384, 420, 1, "RULE ");
+    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 384, 490, 1, "STORY");
+    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 384, 560, 1, "SCOREBOARD");
+    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 384, 630, 1, "EXIT");
     DrawArrowInMenu (allegro);
     DrawSaturn (allegro);
 }
@@ -16,13 +17,23 @@ void MoveArrowInMenu (Allegro *allegro)
 {
     al_get_keyboard_state(&allegro->keyboardState);
     if ( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_UP) )
+    {
         allegro->menu.state--;
+        al_set_sample_instance_playing(allegro->instance6, false); // button music
+        al_set_sample_instance_playing(allegro->instance6, true); // button music
+    }
+
 
     else if ( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_DOWN) )
+    {
         allegro->menu.state++;
+        al_set_sample_instance_playing(allegro->instance6, false); // button music
+        al_set_sample_instance_playing(allegro->instance6, true); // button music
+    }
 
-    if (allegro->menu.state > 3)
-        allegro->menu.state = 3;
+
+    if (allegro->menu.state > 4)
+        allegro->menu.state = 4;
     if (allegro->menu.state < 0)
         allegro->menu.state = 0;
 }
@@ -37,15 +48,19 @@ void DrawArrowInMenu (Allegro *allegro)
         break;
 
     case M_RULE:
-        al_draw_bitmap(allegro->menu.icon_right, 100, 440, 0);
+        al_draw_bitmap(allegro->menu.icon_right, 100, 410, 0);
         break;
 
     case M_STORY:
-        al_draw_bitmap(allegro->menu.icon_right, 100, 540, 0);
+        al_draw_bitmap(allegro->menu.icon_right, 100, 480, 0);
+        break;
+
+    case M_BOARD:
+        al_draw_bitmap(allegro->menu.icon_right, 100, 550, 0);
         break;
 
     case M_EXIT:
-        al_draw_bitmap(allegro->menu.icon_right, 100, 640, 0);
+        al_draw_bitmap(allegro->menu.icon_right, 100, 620, 0);
         break;
 
     }
@@ -65,6 +80,7 @@ void EnterInMenu (Allegro *allegro, Rockman *rockman)
     al_get_keyboard_state(&allegro->keyboardState);
     if ( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_ENTER) )
     {
+        al_set_sample_instance_playing(allegro->instance6, true); // button music
         switch (allegro->menu.state)
         {
         case M_CHOOSE_STAGE:
@@ -80,6 +96,10 @@ void EnterInMenu (Allegro *allegro, Rockman *rockman)
             allegro->STATE = STORY;
             allegro->state_story = 0;
             allegro->time_story001 = 180;
+            break;
+
+        case M_BOARD:
+            allegro->STATE = SCOREBOARD;
             break;
 
         case M_EXIT:

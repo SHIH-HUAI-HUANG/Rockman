@@ -3,23 +3,34 @@
 void DrawChooseStage (Allegro *allegro, Boss_1 *boss_1, Boss_2 *boss_2, Boss_3 *boss_3)
 {
     al_clear_to_color (al_map_rgb (0, 0, 0));
+    DrawSaturn (allegro);
     DrawStar (NUM_STAR, allegro);
     al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 250, 350, 0, "Clone");
     al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 250, 450, 0, "Necromancer");
     al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 250, 550, 0, "Xai Ya");
     al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 650, 50, 0, "Back");
     DrawArrowInStage (allegro, boss_1, boss_2, boss_3);
-    DrawSaturn (allegro);
+    DrawClearStage (allegro);
 }
 
 void MoveArrowInStage (Allegro *allegro)
 {
     al_get_keyboard_state(&allegro->keyboardState);
     if ( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_UP) )
+    {
         allegro->menu.stage--;
+        al_set_sample_instance_playing(allegro->instance6, false); // button music
+        al_set_sample_instance_playing(allegro->instance6, true); // button music
+    }
+
 
     else if ( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_DOWN) )
+    {
         allegro->menu.stage++;
+        al_set_sample_instance_playing(allegro->instance6, false); // button music
+        al_set_sample_instance_playing(allegro->instance6, true); // button music
+    }
+
 
     if (allegro->menu.stage > 2)
         allegro->menu.stage = 2;
@@ -61,6 +72,8 @@ void EnterInStage (Allegro *allegro, Rockman *rockman, Monster *monster)
     al_get_keyboard_state(&allegro->keyboardState);
     if ( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_ENTER) )
     {
+        al_set_sample_instance_playing(allegro->instance8, false);  // turn off taiwan song
+        al_set_sample_instance_playing(allegro->instance6, true); // button music
         switch (allegro->menu.stage)
         {
         case CLONE:
@@ -69,6 +82,7 @@ void EnterInStage (Allegro *allegro, Rockman *rockman, Monster *monster)
             InitRockman(rockman);
             InitMonster (monster);
             InitMap (allegro);
+            al_set_sample_instance_playing(allegro->instance1, true); // open game music
             break;
 
         case 1:
@@ -77,6 +91,7 @@ void EnterInStage (Allegro *allegro, Rockman *rockman, Monster *monster)
             InitRockman(rockman);
             InitMonster (monster);
             InitMap (allegro);
+            al_set_sample_instance_playing(allegro->instance1, true); // open game music
             break;
 
         case 2:
@@ -85,6 +100,7 @@ void EnterInStage (Allegro *allegro, Rockman *rockman, Monster *monster)
             InitRockman(rockman);
             InitMonster (monster);
             InitMap (allegro);
+            al_set_sample_instance_playing(allegro->instance1, true); // open game music
             break;
         }
     }
@@ -145,3 +161,41 @@ void DrawXaiYaInStage (Boss_3 *boss_3, Allegro *allegro)
     else if ( 30 <= range && range < 120)
         al_draw_bitmap (boss_3->img_attack, x, y, 0);
 }
+
+
+
+// Function : draw "new" if stage no passing, or draw "clear";
+void DrawClearStage (Allegro *allegro)
+{
+    switch (allegro->menu.stage)
+    {
+    case CLONE:
+        if (!allegro->pass_stage1)
+            al_draw_textf(allegro->font_24, al_map_rgb(220, 0, 0), 600, 400, 1, "NEW");
+        else
+        {
+            al_draw_textf(allegro->font_24, al_map_rgb(0, 200, 200), 600, 400, 1, "CLEAR");
+        }
+        break;
+
+    case 1:
+        if (!allegro->pass_stage2)
+            al_draw_textf(allegro->font_24, al_map_rgb(220, 0, 0), 600, 400, 1, "NEW");
+        else
+        {
+            al_draw_textf(allegro->font_24, al_map_rgb(0, 200, 200), 600, 400, 1, "CLEAR");
+        }
+        break;
+
+    case 2:
+        if (!allegro->pass_stage3)
+            al_draw_textf(allegro->font_24, al_map_rgb(220, 0, 0), 600, 400, 1, "NEW");
+        else
+        {
+            al_draw_textf(allegro->font_24, al_map_rgb(0, 200, 200), 600, 400, 1, "CLEAR");
+        }
+        break;
+
+    }
+}
+

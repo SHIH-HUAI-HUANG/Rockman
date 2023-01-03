@@ -29,6 +29,12 @@
 #define NUM_MONSTER 10
 
 
+typedef struct Player
+{
+   char name[20];
+
+} Player;
+
 typedef struct Explosion
 {
     float x;
@@ -180,7 +186,8 @@ typedef struct Boss_3
     int time_crazy_attack;
     ALLEGRO_BITMAP *img_idle;
     ALLEGRO_BITMAP *img_attack;
-    ALLEGRO_BITMAP *background;
+    ALLEGRO_BITMAP *background1;
+    ALLEGRO_BITMAP *background2;
     ALLEGRO_BITMAP *explosion;
 
     Bullet bullet;
@@ -213,6 +220,7 @@ typedef struct Allegro
     ALLEGRO_TIMER *timer;
 
     ALLEGRO_DISPLAY *display;
+    ALLEGRO_FONT *font_96;
     ALLEGRO_FONT *font_24;
     ALLEGRO_FONT *font_12;
     bool finish;
@@ -235,6 +243,46 @@ typedef struct Allegro
     bool pass_stage3;
     Rule rule;
     ALLEGRO_BITMAP *defeat;
+    ALLEGRO_BITMAP *victory;
+    ALLEGRO_BITMAP *johnwu001;
+    ALLEGRO_BITMAP *johnwu002;
+
+    ALLEGRO_SAMPLE *sample_stage;
+    ALLEGRO_SAMPLE_INSTANCE *instance1;
+    ALLEGRO_MIXER *mixer1;
+    ALLEGRO_VOICE *voice1;
+    ALLEGRO_SAMPLE *sample_boss1;
+    ALLEGRO_SAMPLE_INSTANCE *instance2;
+    ALLEGRO_MIXER *mixer2;
+    ALLEGRO_VOICE *voice2;
+    ALLEGRO_SAMPLE *sample_boss2;
+    ALLEGRO_SAMPLE_INSTANCE *instance3;
+    ALLEGRO_MIXER *mixer3;
+    ALLEGRO_VOICE *voice3;
+    ALLEGRO_SAMPLE *sample_boss3;
+    ALLEGRO_SAMPLE_INSTANCE *instance4;
+    ALLEGRO_MIXER *mixer4;
+    ALLEGRO_VOICE *voice4;
+    ALLEGRO_SAMPLE *sample_win;
+    ALLEGRO_SAMPLE_INSTANCE *instance5;
+    ALLEGRO_MIXER *mixer5;
+    ALLEGRO_VOICE *voice5;
+    ALLEGRO_SAMPLE *sample_button;
+    ALLEGRO_SAMPLE_INSTANCE *instance6;
+    ALLEGRO_MIXER *mixer6;
+    ALLEGRO_VOICE *voice6;
+    ALLEGRO_SAMPLE *sample_beep;
+    ALLEGRO_SAMPLE_INSTANCE *instance7;
+    ALLEGRO_MIXER *mixer7;
+    ALLEGRO_VOICE *voice7;
+    ALLEGRO_SAMPLE *sample_taiwan;
+    ALLEGRO_SAMPLE_INSTANCE *instance8;
+    ALLEGRO_MIXER *mixer8;
+    ALLEGRO_VOICE *voice8;
+
+    Player player[20]; // store from scoreboard.csv
+    char name[20];
+    int name_length;
 
 } Allegro;
 
@@ -266,7 +314,9 @@ typedef enum
     BOSS_2,
     BOSS_3,
     LOADING,
-    CONTINUE
+    CONTINUE,
+    SCOREBOARD,
+    TYPE
 
 } State_game;
 
@@ -276,6 +326,7 @@ typedef enum
     M_CHOOSE_STAGE,
     M_RULE,
     M_STORY,
+    M_BOARD,
     M_EXIT
 
 } State_menu;
@@ -306,6 +357,7 @@ void DrawRockmanHP (Rockman *rockman);
 void CheckAlive (Rockman *rockman, Allegro *allegro);
 void LimitRockmanInBoss (Rockman *rockman);
 void RockmanSufferDamage (Rockman *rockman);
+void RockmanHurtInBoss (Rockman *rockman);
 
 void CreateBullet (Rockman *rockman);
 void DrawBullet (Rockman *rockman);
@@ -355,7 +407,7 @@ void EnterInStage (Allegro *allegro, Rockman *rockman, Monster *monster);
 void DrawCopymanInStage (Boss_1 *boss_1, Allegro *allegro);
 void DrawNecromancerInStage (Boss_2 *boss_2, Allegro *allegro);
 void DrawXaiYaInStage (Boss_3 *boss_3, Allegro *allegro);
-
+void DrawClearStage (Allegro *allegro);
 
 
 /** Map */
@@ -377,7 +429,7 @@ void StageSmall (Rockman *rockman, Allegro *allegro, Boss_1 *boss_1, Boss_2 *bos
 /** Loading */
 void DrawLoading (Allegro *allegro);
 void DrawProgressBar (Allegro *allegro);
-void LoadingFinish (Allegro *allegro);
+void LoadingFinish (Allegro *allegro, Rockman *rockman);
 
 
 
@@ -439,10 +491,26 @@ void DrawStory (Allegro *allegro);
 void DrawNotPass (Allegro *allegro);
 void DrawPass (Allegro *allegro);
 void AnimePassStory (Allegro *allegro);
-
+void DrawJohnWu (Allegro *allegro);
 
 
 /** rule */
 void DrawRule (Allegro *allegro, Rockman *rockman);
 void DrawKeyboardIcon (Allegro *allegro);
 void InitRockmanInRule (Rockman *rockman);
+
+
+
+/** music */
+void voice_init(ALLEGRO_SAMPLE_INSTANCE *instance, ALLEGRO_MIXER **mixer, ALLEGRO_VOICE **voice);
+
+
+
+/** socre board */
+char **InitPlayerName (int number);
+void ReadScoreCSV (Allegro *allegro);
+void DrawScoreBoard (Allegro *allegro);
+void FillOutScoreBoard (Allegro *allegro);
+void CheckKeyboardDown(Allegro *allegro);
+void DrawTypeName (Allegro *allegro);
+

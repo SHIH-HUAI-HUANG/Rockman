@@ -24,11 +24,13 @@ void DrawProgressBar (Allegro *allegro)
 }
 
 
-void LoadingFinish (Allegro *allegro)
+void LoadingFinish (Allegro *allegro, Rockman *rockman)
 {
     int time = 300; // the pass time
     if (allegro->FRAME >= allegro->frame_flag + time)
     {
         allegro->STATE = CONTINUE;
+        if (rockman->HP > 0)
+            al_set_sample_instance_playing(allegro->instance5, true); // open game music for win
     }
 }

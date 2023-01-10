@@ -27,7 +27,7 @@
 1672776894 source:d:\shih-huai\final_project\rockman\rockman_v0\main.c
 	"resource.h"
 
-1672780167 d:\shih-huai\final_project\rockman\rockman_v0\resource.h
+1673351027 d:\shih-huai\final_project\rockman\rockman_v0\resource.h
 	<stdlib.h>
 	<stdio.h>
 	<math.h>
@@ -43,25 +43,25 @@
 	<allegro5/allegro_audio.h>
 	<allegro5/allegro_primitives.h>
 
-1672428967 source:d:\shih-huai\final_project\rockman\rockman_v0\player.c
+1673353481 source:d:\shih-huai\final_project\rockman\rockman_v0\player.c
 	"resource.h"
 
-1672780197 source:d:\shih-huai\final_project\rockman\rockman_v0\allegro.c
+1673351731 source:d:\shih-huai\final_project\rockman\rockman_v0\allegro.c
 	"resource.h"
 
-1671107758 source:d:\shih-huai\final_project\rockman\rockman_v0\bullet.c
+1673350291 source:d:\shih-huai\final_project\rockman\rockman_v0\bullet.c
 	"resource.h"
 
-1672424615 source:d:\shih-huai\final_project\rockman\rockman_v0\boss_1.c
+1673353235 source:d:\shih-huai\final_project\rockman\rockman_v0\boss_1.c
 	"resource.h"
 
 1671436312 source:d:\shih-huai\final_project\rockman\rockman_v0\start.c
 	"resource.h"
 
-1672733699 source:d:\shih-huai\final_project\rockman\rockman_v0\menu.c
+1673351579 source:d:\shih-huai\final_project\rockman\rockman_v0\menu.c
 	"resource.h"
 
-1672492121 source:d:\shih-huai\final_project\rockman\rockman_v0\choose_stage.c
+1672990747 source:d:\shih-huai\final_project\rockman\rockman_v0\choose_stage.c
 	"resource.h"
 
 1672148234 source:d:\shih-huai\final_project\rockman\rockman_v0\small_stage.c
@@ -79,18 +79,18 @@
 1672036769 source:d:\shih-huai\final_project\rockman\rockman_v0\monster.c
 	"resource.h"
 
-1672464918 source:d:\shih-huai\final_project\rockman\rockman_v0\boss_2.c
+1673350023 source:d:\shih-huai\final_project\rockman\rockman_v0\boss_2.c
 	"resource.h"
 
-1672303863 source:d:\shih-huai\final_project\rockman\rockman_v0\boss_3.c
+1673350119 source:d:\shih-huai\final_project\rockman\rockman_v0\boss_3.c
 	"resource.h"
 
-1672725595 source:d:\shih-huai\final_project\rockman\rockman_v0\story.c
+1673351326 source:d:\shih-huai\final_project\rockman\rockman_v0\story.c
 	"resource.h"
 
 1671300471 source:d:\shih-huai\final_project\rockman\rockman_v0\rule.c
 	"resource.h"
 
-1672780146 source:d:\shih-huai\final_project\rockman\rockman_v0\scoreboard.c
+1673349787 source:d:\shih-huai\final_project\rockman\rockman_v0\scoreboard.c
 	"resource.h"
 

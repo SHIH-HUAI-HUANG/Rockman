@@ -15,7 +15,7 @@ void InitBoss_2 (Boss_2 *boss_2)
     boss_2->x = 600;
     boss_2->y = 495;
     boss_2->speed = 1;
-    boss_2->HP = 10;
+    boss_2->HP = 20;
     boss_2->state = 1;
 
     boss_2->direction = true;
@@ -77,14 +77,6 @@ void StateBoss_2 (Boss_2 *boss_2, Allegro *allegro, Rockman *rockman)
 
 void DrawBoss_2 (Boss_2 *boss_2, Allegro *allegro, Rockman *rockman)
 {
-    al_draw_rectangle(boss_2->x, boss_2->y, boss_2->x + 160, boss_2->y + 144, al_map_rgb(255,0,0), 3);
-    al_draw_rectangle(boss_2->x, boss_2->y, boss_2->x + 240, boss_2->y + 192, al_map_rgb(0, 255,0), 3);
-    if (boss_2->direction)
-        al_draw_rectangle(boss_2->x + 120, boss_2->y + 96, boss_2->x + 240, boss_2->y + 192, al_map_rgb(0, 0, 255), 3);
-    else
-    {
-        al_draw_rectangle(boss_2->x + 120, boss_2->y + 96, boss_2->x, boss_2->y + 192, al_map_rgb(0, 0, 255), 3);
-    }
     int range1 = allegro->FRAME%60;
 
     switch (boss_2->state)
@@ -183,9 +175,10 @@ void BulletCollideBoss_2 (Rockman *rockman, Boss_2 *boss_2)
 
 void DrawBoss_2HP (Boss_2 *boss_2)
 {
+    al_draw_filled_rectangle (663, 55, 723, 203, al_map_rgb(0, 0, 0));
     for (int i = 0; i < boss_2->HP; i++)
     {
-        al_draw_filled_rectangle (668, 200 - (i*7), 718, 205 - (i*7), al_map_rgb(255, 0, 0));
+        al_draw_filled_rectangle (668, 193 - (i*7), 718, 198 - (i*7), al_map_rgb(255, 0, 0));
     }
 }
 

@@ -48,6 +48,7 @@ void AllegroDriverInit(Allegro *allegro)
 
     allegro->font_96 = al_load_font("./data/m5x7.ttf", 60, 0);
     allegro->font_24 = al_load_font("./data/m5x7.ttf", 48, 0);
+    allegro->font_36 = al_load_font("./data/m5x7.ttf", 36, 0);
     allegro->font_12 = al_load_font("./data/m5x7.ttf", 24, 0);
     InitStart (allegro);
     InitMenu (allegro);
@@ -66,6 +67,8 @@ void AllegroDriverInit(Allegro *allegro)
     allegro->victory  = al_load_bitmap ("./picture/win.png");
     allegro->johnwu001 = al_load_bitmap ("./picture/johnwu001.png");
     allegro->johnwu002 = al_load_bitmap ("./picture/johnwu002.png");
+    allegro->jyunwei = al_load_bitmap ("./picture/jyunwei.png");
+    allegro->yangjyun = al_load_bitmap ("./picture/yangjyun.png");
 
     allegro->sample_stage = al_load_sample("./data/music/Elec-Man-Stage.wav");
     allegro->instance1 = al_create_sample_instance (allegro->sample_stage);
@@ -105,8 +108,18 @@ void AllegroDriverInit(Allegro *allegro)
     allegro->sample_taiwan = al_load_sample("./data/music/Taiwan.wav");
     allegro->instance8 = al_create_sample_instance (allegro->sample_taiwan);
     voice_init( allegro->instance8, &(allegro->mixer8), &(allegro->voice8));
-    al_set_sample_instance_gain(allegro->instance8, 1);
+    al_set_sample_instance_gain(allegro->instance8, 0.6);
     al_set_sample_instance_playmode(allegro->instance8, ALLEGRO_PLAYMODE_LOOP);
+    allegro->story001 = al_load_sample("./data/music/Conan001.wav");
+    allegro->instance9 = al_create_sample_instance (allegro->story001);
+    voice_init( allegro->instance9, &(allegro->mixer9), &(allegro->voice9));
+    al_set_sample_instance_gain(allegro->instance9, 1);
+    al_set_sample_instance_playmode(allegro->instance9, ALLEGRO_PLAYMODE_LOOP);
+    allegro->story002 = al_load_sample("./data/music/Conan002.wav");
+    allegro->instance10 = al_create_sample_instance (allegro->story002);
+    voice_init( allegro->instance10, &(allegro->mixer10), &(allegro->voice10));
+    al_set_sample_instance_gain(allegro->instance10, 1);
+    al_set_sample_instance_playmode(allegro->instance10, ALLEGRO_PLAYMODE_LOOP);
 
     al_set_sample_instance_playing(allegro->instance7, true);  //music for start
     ReadScoreCSV (allegro);
@@ -160,6 +173,9 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
                     {
                         allegro->STATE = MENU;
                         al_set_sample_instance_playing(allegro->instance6, true);
+                        al_set_sample_instance_playing(allegro->instance8, true);  // turn on taiwan song
+                        al_set_sample_instance_playing(allegro->instance9, false);  //turn off music
+                        al_set_sample_instance_playing(allegro->instance10, false);  //turn off music
                     }
                     break;
 
@@ -169,8 +185,12 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
                         allegro->STATE = MENU;
                         al_set_sample_instance_playing(allegro->instance6, true);
                     }
-                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_ENTER) /*&& allegro->pass_stage1 && allegro->pass_stage2 && allegro->pass_stage3*/ )
+                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_ENTER) && (allegro->can_type_name==1) )
+                    {
                         allegro->STATE = TYPE;
+                        allegro->can_type_name = -1;
+                    }
+
                     break;
 
                 case TYPE:
@@ -223,7 +243,6 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
 
             case ALLEGRO_EVENT_TIMER: /** timer */
                 allegro->FRAME++; // count the frame
-                printf("jump = %d\n", rockman->jump_time);
 
                 switch (allegro->STATE)
                 {
@@ -307,14 +326,14 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
                     break;
 
                 case STORY:
-                    DrawStory (allegro);
+                    DrawStory (allegro, rockman);
                     break;
 
                 case SCOREBOARD:
                     DrawScoreBoard (allegro);
                     break;
 
-                    case TYPE:
+                case TYPE:
                     DrawTypeName (allegro);
                     break;
                 }

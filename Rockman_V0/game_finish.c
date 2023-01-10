@@ -10,7 +10,7 @@ void DrawGameFinish (Allegro *allegro, Rockman *rockman)
     if (rockman->HP <= 0)
     {
         al_draw_bitmap (allegro->defeat, 0, 100, 0);
-        al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 600, 400, 1, "Defeat");
+       // al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 600, 400, 1, "Defeat");
     }
 
     else if (rockman->HP > 0)

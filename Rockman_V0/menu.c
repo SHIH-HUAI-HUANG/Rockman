@@ -96,6 +96,7 @@ void EnterInMenu (Allegro *allegro, Rockman *rockman)
             allegro->STATE = STORY;
             allegro->state_story = 0;
             allegro->time_story001 = 180;
+            al_set_sample_instance_playing(allegro->instance8, false);  // turn off taiwan song
             break;
 
         case M_BOARD:

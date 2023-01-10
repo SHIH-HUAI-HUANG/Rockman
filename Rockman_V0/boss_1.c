@@ -16,7 +16,7 @@ void InitBoss_1 (Boss_1 *boss_1)
     boss_1->y = 525;
     boss_1->speed = SPEED;
     boss_1->state = STAND;
-    boss_1->HP = 10;
+    boss_1->HP = 20;
 
     boss_1->direction = false;
     boss_1->img = al_load_bitmap ("./picture/rockman.png");
@@ -140,7 +140,7 @@ void InitRockmanInBoss_1 (Rockman *rockman)
 // rockman collide boss, and minus rockman'HP
 void RockmanCollideBoss_1 (Rockman *rockman, Boss_1 *boss_1)
 {
-    if ( abs(rockman->x - boss_1->x) < 80 && abs(rockman->y - boss_1->y) < 90 )
+    if ( abs(rockman->x - boss_1->x) < 70 && abs(rockman->y - boss_1->y) < 80 )
         rockman->HP--;
 }
 
@@ -148,7 +148,7 @@ void RockmanCollideBoss_1 (Rockman *rockman, Boss_1 *boss_1)
 // rockman collide minion, and minus rockman'HP
 void RockmanCollideMinion (Rockman *rockman, Boss_1 *boss_1)
 {
-    if ( abs(rockman->x + 45 - boss_1->minion.x) < 80 && abs(rockman->y + 50 - boss_1->minion.y) < 50 )
+    if ( abs(rockman->x + 45 - boss_1->minion.x - 96) < 30 && abs(rockman->y + 50 - boss_1->minion.y - 56) < 61 )
         rockman->HP--;
 }
 
@@ -198,13 +198,27 @@ void MoveMinion (Boss_1 *boss_1)
     else if (!boss_1->minion.direction_y) // 0
         boss_1->minion.y = boss_1->minion.y - boss_1->minion.speed_y;
 
-    if (boss_1->minion.x < 0 || boss_1->minion.x > 629)
+    if (boss_1->minion.x < 10)
     {
+        boss_1->minion.x = 10;
         boss_1->minion.direction_x = !boss_1->minion.direction_x;
         boss_1->minion.speed_x = 2 + rand()%5;// speed = 2 ~ 6
     }
-    if (boss_1->minion.y < 0 || boss_1->minion.y > 656)
+    if (boss_1->minion.x > 620)
     {
+        boss_1->minion.x = 620;
+        boss_1->minion.direction_x = !boss_1->minion.direction_x;
+        boss_1->minion.speed_x = 2 + rand()%5;// speed = 2 ~ 6
+    }
+    if (boss_1->minion.y < 10)
+    {
+        boss_1->minion.y = 10;
+        boss_1->minion.direction_y = !boss_1->minion.direction_y;
+        boss_1->minion.speed_y = 2 + rand()%5;// speed = 2 ~ 6
+    }
+    if (boss_1->minion.y > 620)
+    {
+        boss_1->minion.y = 620;
         boss_1->minion.direction_y = !boss_1->minion.direction_y;
         boss_1->minion.speed_y = 2 + rand()%5;// speed = 2 ~ 6
     }
@@ -212,9 +226,10 @@ void MoveMinion (Boss_1 *boss_1)
 
 void DrawBoss_1HP (Boss_1 *boss_1)
 {
+    al_draw_filled_rectangle (663, 55, 723, 203, al_map_rgb(0, 0, 0));
     for (int i = 0; i < boss_1->HP; i++)
     {
-        al_draw_filled_rectangle (668, 200 - (i*7), 718, 205 - (i*7), al_map_rgb(255, 0, 0));
+        al_draw_filled_rectangle (668, 193 - (i*7), 718, 198 - (i*7), al_map_rgb(255, 0, 0));
     }
 }
 

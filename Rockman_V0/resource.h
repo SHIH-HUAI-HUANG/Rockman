@@ -31,7 +31,7 @@
 
 typedef struct Player
 {
-   char name[20];
+    char name[20];
 
 } Player;
 
@@ -222,6 +222,7 @@ typedef struct Allegro
     ALLEGRO_DISPLAY *display;
     ALLEGRO_FONT *font_96;
     ALLEGRO_FONT *font_24;
+    ALLEGRO_FONT *font_36;
     ALLEGRO_FONT *font_12;
     bool finish;
     int FRAME;
@@ -246,6 +247,8 @@ typedef struct Allegro
     ALLEGRO_BITMAP *victory;
     ALLEGRO_BITMAP *johnwu001;
     ALLEGRO_BITMAP *johnwu002;
+    ALLEGRO_BITMAP *jyunwei;
+    ALLEGRO_BITMAP *yangjyun;
 
     ALLEGRO_SAMPLE *sample_stage;
     ALLEGRO_SAMPLE_INSTANCE *instance1;
@@ -279,10 +282,20 @@ typedef struct Allegro
     ALLEGRO_SAMPLE_INSTANCE *instance8;
     ALLEGRO_MIXER *mixer8;
     ALLEGRO_VOICE *voice8;
+    ALLEGRO_SAMPLE *story001;
+    ALLEGRO_SAMPLE_INSTANCE *instance9;
+    ALLEGRO_MIXER *mixer9;
+    ALLEGRO_VOICE *voice9;
+    ALLEGRO_SAMPLE *story002;
+    ALLEGRO_SAMPLE_INSTANCE *instance10;
+    ALLEGRO_MIXER *mixer10;
+    ALLEGRO_VOICE *voice10;
 
     Player player[20]; // store from scoreboard.csv
     char name[20];
     int name_length;
+    int number_scoreboard;
+    int can_type_name;
 
 } Allegro;
 
@@ -487,12 +500,12 @@ void CreateExplosion (Boss_3 *boss_3);
 void InitRockmanInBoss_3 (Rockman *rockman);
 
 /** story */
-void DrawStory (Allegro *allegro);
+void DrawStory (Allegro *allegro, Rockman *rockman);
 void DrawNotPass (Allegro *allegro);
 void DrawPass (Allegro *allegro);
 void AnimePassStory (Allegro *allegro);
 void DrawJohnWu (Allegro *allegro);
-
+void DrawRockmanInStory (Rockman *rockman, Allegro *allegro);
 
 /** rule */
 void DrawRule (Allegro *allegro, Rockman *rockman);

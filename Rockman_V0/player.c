@@ -78,7 +78,7 @@ void DrawRockman (Rockman *rockman, Allegro *allegro)
         break;
 
     case JUMP:
-        al_draw_bitmap_region (rockman->img, 0, 233, 101, 105, rockman->x, rockman->y, rockman->direction);
+        al_draw_bitmap_region (rockman->img, 0, 233, 101, 105, rockman->x, rockman->y + 20, rockman->direction);
         break;
 
     case ATTACK:
@@ -171,9 +171,10 @@ void RockmanJumpInBoss (Rockman *rockman, Allegro *allegro)
 
 void DrawRockmanHP (Rockman *rockman)
 {
+    al_draw_filled_rectangle (45, 126, 105, 203, al_map_rgb(0, 0, 0));
     for (int i = 0; i < rockman->HP; i++)
     {
-        al_draw_filled_rectangle (10, 200 - (i*7), 60, 205 - (i*7), al_map_rgb(255, 250, 0));
+        al_draw_filled_rectangle (50, 193 - (i*7), 100, 198 - (i*7), al_map_rgb(250, 250, 210));
     }
 }
 

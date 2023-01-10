@@ -49,18 +49,21 @@ void DrawArrowInStage (Allegro *allegro, Boss_1 *boss_1, Boss_2 *boss_2, Boss_3 
         al_draw_bitmap(allegro->menu.icon_right, 100, 350, 0); // use menu's arrow
         DrawCopymanInStage (boss_1, allegro);
         al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 500, 550, 0, "Name : X");
+        al_draw_textf(allegro->font_12, al_map_rgb(255, 255, 255), 500, 600, 0, "JUST LIKE ROCKMAN.");
         break;
 
     case 1:
         al_draw_bitmap(allegro->menu.icon_right, 100, 450, 0);
         DrawNecromancerInStage (boss_2, allegro);
         al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 500, 550, 0, "Name : Simon");
+        al_draw_textf(allegro->font_12, al_map_rgb(255, 255, 255), 500, 600, 0, "DEMON ONLY HAVE ONE HEART.");
         break;
 
     case 2:
         al_draw_bitmap(allegro->menu.icon_right, 100, 550, 0);
         DrawXaiYaInStage (boss_3, allegro);
         al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 500, 550, 0, "Name : XaiYa");
+        al_draw_textf(allegro->font_12, al_map_rgb(255, 255, 255), 500, 600, 0, "WHAT DID YOU SAY ?");
         break;
 
     }
@@ -171,28 +174,28 @@ void DrawClearStage (Allegro *allegro)
     {
     case CLONE:
         if (!allegro->pass_stage1)
-            al_draw_textf(allegro->font_24, al_map_rgb(220, 0, 0), 600, 400, 1, "NEW");
+            al_draw_textf(allegro->font_12, al_map_rgb(220, 0, 0), 220, 370, 1, "NEW");
         else
         {
-            al_draw_textf(allegro->font_24, al_map_rgb(0, 200, 200), 600, 400, 1, "CLEAR");
+            al_draw_textf(allegro->font_12, al_map_rgb(0, 200, 200), 220, 370, 1, "CLEAR");
         }
         break;
 
     case 1:
         if (!allegro->pass_stage2)
-            al_draw_textf(allegro->font_24, al_map_rgb(220, 0, 0), 600, 400, 1, "NEW");
+            al_draw_textf(allegro->font_12, al_map_rgb(220, 0, 0), 220, 470, 1, "NEW");
         else
         {
-            al_draw_textf(allegro->font_24, al_map_rgb(0, 200, 200), 600, 400, 1, "CLEAR");
+            al_draw_textf(allegro->font_12, al_map_rgb(0, 200, 200), 220, 470, 1, "CLEAR");
         }
         break;
 
     case 2:
         if (!allegro->pass_stage3)
-            al_draw_textf(allegro->font_24, al_map_rgb(220, 0, 0), 600, 400, 1, "NEW");
+            al_draw_textf(allegro->font_12, al_map_rgb(220, 0, 0), 220, 570, 1, "NEW");
         else
         {
-            al_draw_textf(allegro->font_24, al_map_rgb(0, 200, 200), 600, 400, 1, "CLEAR");
+            al_draw_textf(allegro->font_12, al_map_rgb(0, 200, 200), 220, 570, 1, "CLEAR");
         }
         break;
 

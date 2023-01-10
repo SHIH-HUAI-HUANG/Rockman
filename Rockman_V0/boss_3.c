@@ -16,7 +16,7 @@ void InitBoss_3 (Boss_3 *boss_3)
     boss_3->y = 0;
     boss_3->speed_x = 2;
     boss_3->speed_y = 2;
-    boss_3->HP = 10;
+    boss_3->HP = 20;
     boss_3->HP_2 = 1;
     boss_3->state = 0;
     boss_3->bullet.activity = false;
@@ -266,18 +266,19 @@ void BulletCollideBoss_3 (Rockman *rockman, Boss_3 *boss_3, Allegro *allegro)
 
 void DrawBoss_3HP (Boss_3 *boss_3)
 {
+    al_draw_filled_rectangle (663, 55, 723, 203, al_map_rgb(0, 0, 0));
     if (boss_3->state == 0)
     {
         for (int i = 0; i < boss_3->HP; i++)
         {
-            al_draw_filled_rectangle (668, 200 - (i*7), 718, 205 - (i*7), al_map_rgb(255, 0, 0));
+            al_draw_filled_rectangle (668, 193 - (i*7), 718, 198 - (i*7), al_map_rgb(255, 0, 0));
         }
     }
     else  if (boss_3->state == 1)
     {
         for (int i = 0; i < boss_3->HP_2; i++)
         {
-            al_draw_filled_rectangle (668, 200 - (i*7), 718, 210 - (i*7), al_map_rgb(255, 0, 0));
+            al_draw_filled_rectangle (668, 193 - (i*7), 718, 198 - (i*7), al_map_rgb(255, 0, 0));
         }
     }
 }

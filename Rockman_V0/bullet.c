@@ -35,7 +35,6 @@ void DrawBullet (Rockman *rockman)
         if (rockman->bullet[i].activity)
         {
              al_draw_bitmap_region (rockman->img, 272, 516, 28, 21,rockman->bullet[i].x, rockman->bullet[i].y, 0);
-             al_draw_rectangle (rockman->bullet[i].x, rockman->bullet[i].y, rockman->bullet[i].x + 28, rockman->bullet[i].y + 21,al_map_rgb(255,0,0), 3);
         }
 
     }

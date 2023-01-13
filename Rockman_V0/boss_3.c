@@ -196,7 +196,6 @@ void MoveBoss_3Bullet (Boss_3 *boss_3)
     {
         boss_3->bullet.x = boss_3->bullet.x + boss_3->bullet.speed_x;
         boss_3->bullet.y = boss_3->bullet.y + boss_3->bullet.speed_y;
-        printf("x = %d, y = %d \n", boss_3->bullet.speed_x, boss_3->bullet.speed_y);
     }
 }
 

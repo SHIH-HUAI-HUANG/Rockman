@@ -26,9 +26,11 @@ void DrawTextInStart (Allegro *allegro)
 {
     int range = allegro->FRAME%60;
     if ( 0 <= range && range < 40)
+    {
         al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 384, 600, 1, "PRESS ENTER TO START");
-         al_draw_textf(allegro->font_12, al_map_rgb(255, 255, 255), 384, 650, 1, "LICENSED BY NINTENDO");
-
+        al_draw_textf(allegro->font_12, al_map_rgb(255, 255, 255), 384, 650, 1, "LICENSED BY NINTENDO");
+        al_draw_textf(allegro->font_12, al_map_rgb(255, 255, 255), 384, 675, 1, "SHIH-HUAI & JIA-LIN");
+    }
 }
 
 

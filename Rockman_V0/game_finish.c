@@ -10,15 +10,15 @@ void DrawGameFinish (Allegro *allegro, Rockman *rockman)
     if (rockman->HP <= 0)
     {
         al_draw_bitmap (allegro->defeat, 0, 100, 0);
-       // al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 600, 400, 1, "Defeat");
+        DrawContinue (allegro);
     }
 
     else if (rockman->HP > 0)
     {
         al_draw_bitmap (allegro->victory, 0, 0, 0);
         al_draw_textf(allegro->font_96, al_map_rgb(255, 255, 255), 200, 300, 1, "Pass !!");
+        DrawContinue (allegro);
     }
-    DrawContinue (allegro);
 
     al_get_keyboard_state(&allegro->keyboardState);
     if ( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_ENTER) )

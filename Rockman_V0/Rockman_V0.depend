@@ -46,7 +46,7 @@
 1673353481 source:d:\shih-huai\final_project\rockman\rockman_v0\player.c
 	"resource.h"
 
-1673351731 source:d:\shih-huai\final_project\rockman\rockman_v0\allegro.c
+1673527132 source:d:\shih-huai\final_project\rockman\rockman_v0\allegro.c
 	"resource.h"
 
 1673350291 source:d:\shih-huai\final_project\rockman\rockman_v0\bullet.c
@@ -55,13 +55,13 @@
 1673353235 source:d:\shih-huai\final_project\rockman\rockman_v0\boss_1.c
 	"resource.h"
 
-1671436312 source:d:\shih-huai\final_project\rockman\rockman_v0\start.c
+1673574543 source:d:\shih-huai\final_project\rockman\rockman_v0\start.c
 	"resource.h"
 
 1673351579 source:d:\shih-huai\final_project\rockman\rockman_v0\menu.c
 	"resource.h"
 
-1672990747 source:d:\shih-huai\final_project\rockman\rockman_v0\choose_stage.c
+1673353924 source:d:\shih-huai\final_project\rockman\rockman_v0\choose_stage.c
 	"resource.h"
 
 1672148234 source:d:\shih-huai\final_project\rockman\rockman_v0\small_stage.c
@@ -70,10 +70,10 @@
 1672421788 source:d:\shih-huai\final_project\rockman\rockman_v0\map.c
 	"resource.h"
 
-1672149387 source:d:\shih-huai\final_project\rockman\rockman_v0\loading.c
+1673573002 source:d:\shih-huai\final_project\rockman\rockman_v0\loading.c
 	"resource.h"
 
-1672429518 source:d:\shih-huai\final_project\rockman\rockman_v0\game_finish.c
+1673573212 source:d:\shih-huai\final_project\rockman\rockman_v0\game_finish.c
 	"resource.h"
 
 1672036769 source:d:\shih-huai\final_project\rockman\rockman_v0\monster.c
@@ -82,7 +82,7 @@
 1673350023 source:d:\shih-huai\final_project\rockman\rockman_v0\boss_2.c
 	"resource.h"
 
-1673350119 source:d:\shih-huai\final_project\rockman\rockman_v0\boss_3.c
+1673527426 source:d:\shih-huai\final_project\rockman\rockman_v0\boss_3.c
 	"resource.h"
 
 1673351326 source:d:\shih-huai\final_project\rockman\rockman_v0\story.c
@@ -91,6 +91,6 @@
 1671300471 source:d:\shih-huai\final_project\rockman\rockman_v0\rule.c
 	"resource.h"
 
-1673349787 source:d:\shih-huai\final_project\rockman\rockman_v0\scoreboard.c
+1673528410 source:d:\shih-huai\final_project\rockman\rockman_v0\scoreboard.c
 	"resource.h"
 

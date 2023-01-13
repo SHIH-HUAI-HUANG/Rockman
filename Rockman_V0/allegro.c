@@ -230,16 +230,6 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
                 }
                 break;
 
-            case ALLEGRO_EVENT_KEY_UP:
-                break;
-
-            case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
-                printf("x = %d, y = %d\n", allegro->events.mouse.x, allegro->events.mouse.y);
-                printf("map = %d \n", allegro->matrix_map[allegro->events.mouse.y][allegro->events.mouse.x + 40]);
-                break;
-
-            case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
-                break;
 
             case ALLEGRO_EVENT_TIMER: /** timer */
                 allegro->FRAME++; // count the frame

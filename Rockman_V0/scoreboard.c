@@ -49,9 +49,9 @@ void DrawTypeName (Allegro *allegro)
 
     for (int j = 0; j < allegro->name_length; j++)
     {
-        al_draw_textf(allegro->font_96, al_map_rgb(255, 255, 255), 270 + j*20, 300, 1, "%c", allegro->name[j]);
+        al_draw_textf(allegro->font_96, al_map_rgb(255, 255, 255), 250 + j*20, 300, 1, "%c", allegro->name[j]);
     }
-
+    al_draw_filled_rectangle (200, 348, 568, 352, al_map_rgb(255, 255, 255));
 }
 
 

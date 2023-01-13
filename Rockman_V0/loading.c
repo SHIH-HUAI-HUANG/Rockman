@@ -11,16 +11,15 @@ void DrawLoading (Allegro *allegro)
 void DrawProgressBar (Allegro *allegro)
 {
     int range = allegro->FRAME%80;
-    int x = 100, y = 200;
 
     if ( 0 <= range && range < 20)
-        al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 400, 350, 0, ".");
+        al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 420, 350, 0, ".");
     else  if ( 20 <= range && range < 40)
-        al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 400, 350, 0, ". .");
+        al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 420, 350, 0, ". .");
     else if ( 40 <= range && range < 60)
-        al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 400, 350, 0, ". . .");
+        al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 420, 350, 0, ". . .");
     else if ( 60 <= range && range < 80)
-        al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 400, 350, 0, ". . . .");
+        al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 420, 350, 0, ". . . .");
 }
 
 

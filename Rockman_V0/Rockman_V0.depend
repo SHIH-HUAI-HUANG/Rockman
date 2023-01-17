@@ -24,10 +24,10 @@
 1670226638 source:d:\shih-huai\rockman_v0\allegro.c
 	"resource.h"
 
-1672776894 source:d:\shih-huai\final_project\rockman\rockman_v0\main.c
+1673701676 source:d:\shih-huai\final_project\rockman\rockman_v0\main.c
 	"resource.h"
 
-1673351027 d:\shih-huai\final_project\rockman\rockman_v0\resource.h
+1673701621 d:\shih-huai\final_project\rockman\rockman_v0\resource.h
 	<stdlib.h>
 	<stdio.h>
 	<math.h>
@@ -46,7 +46,7 @@
 1673353481 source:d:\shih-huai\final_project\rockman\rockman_v0\player.c
 	"resource.h"
 
-1673527132 source:d:\shih-huai\final_project\rockman\rockman_v0\allegro.c
+1673701630 source:d:\shih-huai\final_project\rockman\rockman_v0\allegro.c
 	"resource.h"
 
 1673350291 source:d:\shih-huai\final_project\rockman\rockman_v0\bullet.c
@@ -82,15 +82,15 @@
 1673350023 source:d:\shih-huai\final_project\rockman\rockman_v0\boss_2.c
 	"resource.h"
 
-1673527426 source:d:\shih-huai\final_project\rockman\rockman_v0\boss_3.c
+1673700950 source:d:\shih-huai\final_project\rockman\rockman_v0\boss_3.c
 	"resource.h"
 
 1673351326 source:d:\shih-huai\final_project\rockman\rockman_v0\story.c
 	"resource.h"
 
-1671300471 source:d:\shih-huai\final_project\rockman\rockman_v0\rule.c
+1673680709 source:d:\shih-huai\final_project\rockman\rockman_v0\rule.c
 	"resource.h"
 
-1673528410 source:d:\shih-huai\final_project\rockman\rockman_v0\scoreboard.c
+1673682517 source:d:\shih-huai\final_project\rockman\rockman_v0\scoreboard.c
 	"resource.h"
 

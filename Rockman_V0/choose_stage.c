@@ -56,7 +56,7 @@ void DrawArrowInStage (Allegro *allegro, Boss_1 *boss_1, Boss_2 *boss_2, Boss_3 
         al_draw_bitmap(allegro->menu.icon_right, 100, 450, 0);
         DrawNecromancerInStage (boss_2, allegro);
         al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 500, 550, 0, "Name : Simon");
-        al_draw_textf(allegro->font_12, al_map_rgb(255, 255, 255), 500, 600, 0, "DEMON ONLY HAVE ONE HEART.");
+        al_draw_textf(allegro->font_12, al_map_rgb(255, 255, 255), 500, 600, 0, "DEMON ONLY HAS ONE HEART.");
         break;
 
     case 2:

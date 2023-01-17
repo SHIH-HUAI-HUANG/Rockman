@@ -318,5 +318,34 @@ void InitRockmanInBoss_3 (Rockman *rockman)
 }
 
 
+void StageBoss_3 (Boss_3 *boss_3, Rockman *rockman, Allegro *allegro)
+{
+    RockmanJumpInBoss (rockman, allegro);
+    RockmanStateInBoss (rockman, allegro);
+    MoveRockmanInBoss (rockman, allegro);
+    MoveBullet (rockman);
+    CheckBulletOver (rockman);
+    LimitRockmanInBoss (rockman);
+    RockmanCollideBoss_3 (rockman, boss_3);
+    CheckAlive (rockman, allegro);
+    RockmanHurtInBoss (rockman);
 
+    BulletCollideBoss_3 (rockman, boss_3, allegro);
+    if (boss_3->state == 0) MoveNormalYA (boss_3);
+    else if (boss_3->state == 1) MoveCrazyYA (boss_3, rockman);
+
+    CheckBoss_3Bullet (boss_3, rockman);
+    MoveBoss_3Bullet (boss_3);
+    CheckBoss_3BulletOver (boss_3, rockman);
+
+    if (boss_3->state == 0)  al_draw_bitmap (boss_3->background1, 0, 0, 0);
+    else if (boss_3->state == 1)  al_draw_bitmap (boss_3->background2, 0, 0, 0);
+    DrawBoss_3HP (boss_3);
+    DrawBullet (rockman);
+    DrawRockman (rockman, allegro);
+    DrawRockmanHP (rockman);
+    DrawBoss_3 (boss_3, allegro);
+    DrawExplosion (boss_3);
+    DrawBoss_3Bullet (boss_3);
+}
 

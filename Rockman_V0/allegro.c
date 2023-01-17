@@ -140,94 +140,7 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
                 break;
 
             case ALLEGRO_EVENT_KEY_DOWN: /** key down */
-                al_get_keyboard_state(&allegro->keyboardState);
-                switch (allegro->STATE)
-                {
-                case START:
-                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_ENTER) )
-                    {
-                        allegro->STATE = MENU;
-                        al_set_sample_instance_playing(allegro->instance7, false); // turn off beep song
-                        al_set_sample_instance_playing(allegro->instance8, true);  // turn on taiwan song
-                        al_set_sample_instance_playing(allegro->instance6, true);
-                    }
-                    break;
-
-                case MENU:
-                    MoveArrowInMenu (allegro);
-                    EnterInMenu (allegro, rockman);
-                    break;
-
-                case STAGE:
-                    MoveArrowInStage (allegro);
-                    EnterInStage (allegro, rockman, monster);
-                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_BACKSPACE) )
-                    {
-                        allegro->STATE = MENU;
-                        al_set_sample_instance_playing(allegro->instance6, true);
-                    }
-                    break;
-
-                case STORY:
-                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_BACKSPACE) )
-                    {
-                        allegro->STATE = MENU;
-                        al_set_sample_instance_playing(allegro->instance6, true);
-                        al_set_sample_instance_playing(allegro->instance8, true);  // turn on taiwan song
-                        al_set_sample_instance_playing(allegro->instance9, false);  //turn off music
-                        al_set_sample_instance_playing(allegro->instance10, false);  //turn off music
-                    }
-                    break;
-
-                case SCOREBOARD:
-                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_BACKSPACE) )
-                    {
-                        allegro->STATE = MENU;
-                        al_set_sample_instance_playing(allegro->instance6, true);
-                    }
-                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_ENTER) && (allegro->can_type_name==1) )
-                    {
-                        allegro->STATE = TYPE;
-                        allegro->can_type_name = -1;
-                    }
-
-                    break;
-
-                case TYPE:
-                    CheckKeyboardDown (allegro);
-                    break;
-
-                case RULE:
-                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_BACKSPACE) )
-                    {
-                        allegro->STATE = MENU;
-                        al_set_sample_instance_playing(allegro->instance6, true);
-                    }
-
-                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
-                        CreateBullet (rockman);
-                    break;
-
-                case BOSS_1:
-                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
-                        CreateBullet (rockman);
-                    break;
-
-                case BOSS_2:
-                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
-                        CreateBullet (rockman);
-                    break;
-
-                case BOSS_3:
-                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
-                        CreateBullet (rockman);
-                    break;
-
-                case SMALL_STAGE:
-                    if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
-                        CreateBullet (rockman);
-                    break;
-                }
+                EventCheckKeyDown (allegro, rockman, monster);
                 break;
 
 
@@ -276,33 +189,7 @@ void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *bo
                     break;
 
                 case BOSS_3:
-                    RockmanJumpInBoss (rockman, allegro);
-                    RockmanStateInBoss (rockman, allegro);
-                    MoveRockmanInBoss (rockman, allegro);
-                    MoveBullet (rockman);
-                    CheckBulletOver (rockman);
-                    LimitRockmanInBoss (rockman);
-                    RockmanCollideBoss_3 (rockman, boss_3);
-                    CheckAlive (rockman, allegro);
-                    RockmanHurtInBoss (rockman);
-
-                    BulletCollideBoss_3 (rockman, boss_3, allegro);
-                    if (boss_3->state == 0) MoveNormalYA (boss_3);
-                    else if (boss_3->state == 1) MoveCrazyYA (boss_3, rockman);
-
-                    CheckBoss_3Bullet (boss_3, rockman);
-                    MoveBoss_3Bullet (boss_3);
-                    CheckBoss_3BulletOver (boss_3, rockman);
-
-                    if (boss_3->state == 0)  al_draw_bitmap (boss_3->background1, 0, 0, 0);
-                    else if (boss_3->state == 1)  al_draw_bitmap (boss_3->background2, 0, 0, 0);
-                    DrawBoss_3HP (boss_3);
-                    DrawBullet (rockman);
-                    DrawRockman (rockman, allegro);
-                    DrawRockmanHP (rockman);
-                    DrawBoss_3 (boss_3, allegro);
-                    DrawExplosion (boss_3);
-                    DrawBoss_3Bullet (boss_3);
+                    StageBoss_3 (boss_3, rockman, allegro);
                     break;
 
                 case LOADING:
@@ -344,3 +231,101 @@ void voice_init(ALLEGRO_SAMPLE_INSTANCE *instance, ALLEGRO_MIXER **mixer, ALLEGR
     al_attach_sample_instance_to_mixer(instance, *mixer);
     al_attach_mixer_to_voice(*mixer, *voice);
 }
+
+
+
+void EventCheckKeyDown (Allegro *allegro, Rockman *rockman, Monster *monster)
+{
+    al_get_keyboard_state(&allegro->keyboardState);
+    switch (allegro->STATE)
+    {
+    case START:
+        if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_ENTER) )
+        {
+            allegro->STATE = MENU;
+            al_set_sample_instance_playing(allegro->instance7, false); // turn off beep song
+            al_set_sample_instance_playing(allegro->instance8, true);  // turn on taiwan song
+            al_set_sample_instance_playing(allegro->instance6, true);
+        }
+        break;
+
+    case MENU:
+        MoveArrowInMenu (allegro);
+        EnterInMenu (allegro, rockman);
+        break;
+
+    case STAGE:
+        MoveArrowInStage (allegro);
+        EnterInStage (allegro, rockman, monster);
+        if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_BACKSPACE) )
+        {
+            allegro->STATE = MENU;
+            al_set_sample_instance_playing(allegro->instance6, true);
+        }
+        break;
+
+    case STORY:
+        if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_BACKSPACE) )
+        {
+            allegro->STATE = MENU;
+            al_set_sample_instance_playing(allegro->instance6, true);
+            al_set_sample_instance_playing(allegro->instance8, true);  // turn on taiwan song
+            al_set_sample_instance_playing(allegro->instance9, false);  //turn off music
+            al_set_sample_instance_playing(allegro->instance10, false);  //turn off music
+        }
+        break;
+
+    case SCOREBOARD:
+        if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_BACKSPACE) )
+        {
+            allegro->STATE = MENU;
+            al_set_sample_instance_playing(allegro->instance6, true);
+        }
+        if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_ENTER) && (allegro->can_type_name==1) )
+        {
+            allegro->STATE = TYPE;
+            allegro->can_type_name = -1;
+        }
+
+        break;
+
+    case TYPE:
+        CheckKeyboardDown (allegro);
+        break;
+
+    case RULE:
+        if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_BACKSPACE) )
+        {
+            allegro->STATE = MENU;
+            al_set_sample_instance_playing(allegro->instance6, true);
+        }
+
+        if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
+            CreateBullet (rockman);
+        break;
+
+    case BOSS_1:
+        if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
+            CreateBullet (rockman);
+        break;
+
+    case BOSS_2:
+        if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
+            CreateBullet (rockman);
+        break;
+
+    case BOSS_3:
+        if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
+            CreateBullet (rockman);
+        break;
+
+    case SMALL_STAGE:
+        if( al_key_down(&allegro->keyboardState, ALLEGRO_KEY_SPACE) )
+            CreateBullet (rockman);
+        break;
+    }
+}
+
+
+
+

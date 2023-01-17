@@ -71,7 +71,7 @@ void DrawScoreBoard (Allegro *allegro)
     al_draw_textf(allegro->font_12, al_map_rgb(255, 255, 255), 365, 430, 0, "Dr.YANG-JYUN and Dr.JYUN-WEI. They are very");
     al_draw_textf(allegro->font_12, al_map_rgb(255, 255, 255), 365, 460, 0, "professional technical adviser in this WAR.");
     al_draw_textf(allegro->font_12, al_map_rgb(255, 255, 255), 365, 490, 0, "The Author on behalf of all members, thanks");
-    al_draw_textf(allegro->font_12, al_map_rgb(255, 255, 255), 365, 520, 0, "for your contribution. Therefore, we make this");
+    al_draw_textf(allegro->font_12, al_map_rgb(255, 255, 255), 365, 520, 0, "for your contribution. Therefore, we made this");
     al_draw_textf(allegro->font_12, al_map_rgb(255, 255, 255), 365, 550, 0, "SCOREBOARD to commemorate this history.");
 
     for (int i = 0; i < allegro->number_scoreboard; i++)
@@ -97,10 +97,10 @@ void FillOutScoreBoard (Allegro *allegro)
     if (allegro->number_scoreboard > 9) allegro->number_scoreboard = 9; /** ensure scoreboard only ten player */
 
     FILE *csv;
-    if( (csv = fopen("./data/scoreboard.csv", "w")) == NULL )
+    if( (csv = fopen("./data/scoreboard.csv", "w+")) == NULL )
     {
         puts("Fail to open file!");
-        exit(0);
+        //exit(0);
     }
     fprintf(csv, "%s\n", allegro->name);
     for (int i = 0; i < allegro->number_scoreboard; i++)

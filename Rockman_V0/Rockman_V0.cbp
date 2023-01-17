@@ -49,6 +49,19 @@
 		<Unit filename="choose_stage.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="data/m5x7.ttf" />
+		<Unit filename="data/map.csv" />
+		<Unit filename="data/music/Conan001.wav" />
+		<Unit filename="data/music/Conan002.wav" />
+		<Unit filename="data/music/Elec-Man-Stage.wav" />
+		<Unit filename="data/music/Taiwan.wav" />
+		<Unit filename="data/music/WilyFortres 1.wav" />
+		<Unit filename="data/music/WilyFortres 2.wav" />
+		<Unit filename="data/music/WilyFortres 3.wav" />
+		<Unit filename="data/music/beep.wav" />
+		<Unit filename="data/music/button.wav" />
+		<Unit filename="data/music/victory.wav" />
+		<Unit filename="data/scoreboard.csv" />
 		<Unit filename="game_finish.c">
 			<Option compilerVar="CC" />
 		</Unit>

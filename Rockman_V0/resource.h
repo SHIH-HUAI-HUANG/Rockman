@@ -358,6 +358,7 @@ typedef enum
 Allegro *CallocAllegro();
 void AllegroDriverInit(Allegro *allegro);
 void EventCheck(Allegro *allegro, Rockman *rockman, Monster *monster, Boss_1 *boss_1, Boss_2 *boss_2, Boss_3 *boss_3);
+void EventCheckKeyDown (Allegro *allegro, Rockman *rockman, Monster *monster);
 
 /** rockman */
 Rockman *CallocRockman();
@@ -498,6 +499,7 @@ void BulletCollideBoss_3 (Rockman *rockman, Boss_3 *boss_3, Allegro *allegro);
 void MoveCrazyYA (Boss_3 *boss_3, Rockman *rockman);
 void CreateExplosion (Boss_3 *boss_3);
 void InitRockmanInBoss_3 (Rockman *rockman);
+void StageBoss_3 (Boss_3 *boss_3, Rockman *rockman, Allegro *allegro);
 
 /** story */
 void DrawStory (Allegro *allegro, Rockman *rockman);

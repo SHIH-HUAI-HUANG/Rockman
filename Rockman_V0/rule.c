@@ -5,14 +5,7 @@ void DrawRule (Allegro *allegro, Rockman *rockman)
 {
     al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 384, 50, 1, "RULE");
     al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 650, 50, 0, "Back");
-
-    /*al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 200, 250, 0, "jump");
-    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 200, 300, 0, "right");
-    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 200, 350, 0, "left");
-    al_draw_textf(allegro->font_24, al_map_rgb(255, 255, 255), 200, 400, 0, "attack");*/
-
     DrawKeyboardIcon (allegro);
-
 }
 
 
@@ -40,4 +33,5 @@ void InitRockmanInRule (Rockman *rockman)
 {
     rockman->x = 350;
     rockman->y = 500;
+    rockman->jump_time = 0;
 }
